@@ -1,0 +1,41 @@
+name: Build and Push Tools to GitHub Container Registry
+
+on:
+  push:
+    branches:
+      - main
+      - '*'  # Adjust as needed for your branch patterns
+  pull_request:
+    branches:
+      - main
+      - 'feature/*'
+
+jobs:
+  build-and-push-tools-container:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to GitHub Container Registry (GHCR)
+      - name: Authenticate to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      # Step 3: Try pulling the existing image (if it exists)
+      - name: Pull existing image (if available)
+        continue-on-error: true  # Continue even if the image doesn't exist
+        run: |
+          docker pull ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }} || echo "No existing image found"
+
+      # Step 4: Build Docker image (will use cached layers if pull was successful)
+      - name: Build Docker image
+        run: |
+          docker build -f tools/Containerfile \
+            -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }} tools
+
+      # Step 5: Push the image to GHCR
+      - name: Push Docker image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }}

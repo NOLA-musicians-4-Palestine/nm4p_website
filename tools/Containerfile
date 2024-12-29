@@ -1,0 +1,3 @@
+FROM python:latest
+RUN pip install ipython python-frontmatter google-api-python-client google-auth-httplib2 google-auth-oauthlib pytz python-slugify
+
