@@ -1,31 +1,29 @@
 ---
 layout: band
 ---
-## Upcoming Rehearsals and Actions
+## Upcoming Rehearsals:
 
-### HONK! Logistics Meeting:
-Monday Sept. 30th @ 4pm. (link in NM4P HONK! chat description)
+- Thusday, 1/2, 7:30-9:30p
+- Sunday, 1/5,2-4p.
 
-### Regular Rehearsals:
-TODO: Schedule next rehearsal
+Location: Architect Alley/Street
 
 ## Rep List
 ### Current Rep
 
 {% for song in site.songs %}
 {% if song.status == "current" %}
-- [{{song.title}}]({{song.url}})
+- [{{song.title}}]({{song.url | relative_url}})
 {% endif %}
 {% endfor %}
 
 ### Songs we're currently learning
-We have arrangements for these, and are working them up to play out.
-
 {% for song in site.songs %}
 {% if song.status == "learning" %}
-- [{{song.title}}]({{song.url}})
+- [{{song.title}}]({{song.url | relative_url}})
 {% endif %}
 {% endfor %}
+ 
 
 ### Songs we want to play
 We don't have arrangements for these yet, but they're on our radar.
@@ -33,7 +31,7 @@ If you want to make an arrangement that'd be cool.
 
 {% for song in site.songs %}
 {% if song.status == "future" %}
-- [{{song.title}}]({{song.url}})
+- [{{song.title}}]({{song.url | relative_url}})
 {% endif %}
 {% endfor %}
 

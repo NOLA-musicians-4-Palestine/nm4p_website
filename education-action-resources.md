@@ -7,7 +7,7 @@ layout: education-action-resources
 	- [Project Watermelon](https://www.instagram.com/projectwater.melon?igsh=ZDRvcmw0NGN1b20y)
 	- Let’s Talk Palestine:
 		- [Funds for Gaza linktree](https://linktr.ee/fundsforgaza?fbclid=PAZXh0bgNhZW0CMTEAAabU721pCNGCF2wnmsR1nDFcmnb-SP8KX_3VbQu8RuvsAOvdobeQLu0SjXU_aem_P6uDnTAZgxHFW8NCPLyZMA)
-	- [INARA Lebanon mutual aid funds](inara.org/lebanon)
+	- [INARA Lebanon mutual aid funds](https://inara.org/lebanon)
 		- [Info](https://www.instagram.com/p/DAqbLvLOmHo/?igsh=cThtN3k2NjhmZXhy)
 - Sending eSims to Gaza:
 	- Connecting Humanity (@connectinghummanity_ on IG)
