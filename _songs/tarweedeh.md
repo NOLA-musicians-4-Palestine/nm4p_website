@@ -1,7 +1,8 @@
 ---
 title: Tarweedeh-Ta3lliaeen Medley
 charts_folder: assets/charts/tarweedeh
-status: learning
+recordings_folder: assets/recordings/tarweedeh
+status: current
 arranger: Ashlae Blum
 ---
 

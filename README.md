@@ -2,6 +2,11 @@
 layout: readme
 ---
 
+# Deployment Setup Instructions
+
+To deploy this site from the `live` branch using the [included action](.github/workflows/pages-deploy.yml), click the **Settings** tab and the **Pages** section (or [here](../../settings/pages)) and ensure the **Source** is set to "Github Actions"
+
+
 # site structure and status
 
 ## Home

@@ -2,6 +2,7 @@
 title: Bahlam Beek
 composer: look this up
 charts_folder: assets/charts/bahlam_beek
-status: learning
+recordings_folder: assets/recordings/bahlam_beek
+status: current
 arranger: Romain Beauxis
 ---

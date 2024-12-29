@@ -14,6 +14,17 @@ function setup_info_on_click(){
 setup_info_on_click();
 
 function hide_past_events(){
+	let cal = document.querySelector("#calendar");
+
+	window.old_events = [];
+
+	let show_old_button = document.querySelector("#show-old-events");
+	show_old_button.addEventListener("click", (e) => {
+		window.old_events.forEach((event) => {
+			cal.appendChild(event);
+		});
+		window.old_events = [];
+	});
 	// get all the events
 	let events = document.querySelectorAll(".event");
 
@@ -27,15 +38,15 @@ function hide_past_events(){
 
 	let today = parseInt(formatted_date);
 
-	let cal = document.querySelector("#calendar");
 
 	// delete past events
 	events.forEach((event) => {
 		let event_date = parseInt(event.dataset.date);
 		console.log(event_date, today);
 		if(today > event_date){
-			cal.removeChild(event);
+			window.old_events.push(cal.removeChild(event));
 		}
 	});
 }
+
 hide_past_events();

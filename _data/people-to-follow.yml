@@ -1,0 +1,16 @@
+- name: ACTION
+  link: https://www.instagram.com/projectwater.melon?igsh=ZDRvcmw0NGN1b20y
+  description: > # the arrow allows multiple lines
+    Nonprofit organization providing humanitarian aid
+    and mentail health support to Palestinians around the world
+  category: actions # | follow | news
+# description and link are optional
+# if you don't want to fill them out, delete the whole line, don't just leave an empty description or empty link.
+# this helps the website automatically format things correctly
+
+- name: FOLLOW
+  link: https://www.instagram.com/projectwater.melon?igsh=ZDRvcmw0NGN1b20y
+  description: > # the arrow concatenates multiple lines
+    Nonprofit organization providing humanitarian aid
+    and mentail health support to Palestinians around the world
+  category: follow
