@@ -12,7 +12,7 @@ layout: default
 	<ul>
 	{% assign chart_files = site.static_files | where_exp: "chart_file", "chart_file.path contains page.charts_folder" %}
 	{% for chart in chart_files %}
-		<li><a target="_blank" href="{{ chart.path | absolute_url }}">{{ chart.basename }}</a></li>
+		<li><a target="_blank" href="{{ chart.path | relative_url }}">{{ chart.basename }}</a></li>
 	{% endfor %}
 	</ul>
 
@@ -30,7 +30,7 @@ layout: default
 	<ul>
 	{% assign rec_files = site.static_files | where_exp: "rec_file", "rec_file.path contains page.recordings_folder" %}
 	{% for rec in rec_files %}
-		<li><a target="_blank" href="{{ rec.path | absolute_url }}">{{ rec.basename }}</a></li>
+		<li><a target="_blank" href="{{ rec.path | relative_url }}">{{ rec.basename }}</a></li>
 	{% endfor %}
 	</ul>
 

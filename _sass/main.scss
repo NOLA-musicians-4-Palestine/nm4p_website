@@ -34,7 +34,7 @@ body{
 
 .net-pattern-bg{
 	border: solid rgba(0,0,0,0) 1px;
-	background-image: url("/assets/images/kuffiyeh_net.png");
+	background-image: url("../images/kuffiyeh_net.png");
 	background-repeat: repeat;
 	background-size: 20px;
 	margin: 20px 0px;
@@ -47,7 +47,7 @@ body{
 
 .olive-pattern-bg{
 	border: solid rgba(0,0,0,0) 1px;
-	background-image: url("/assets/images/kuffiyeh_olive_leaves.png");
+	background-image: url("../images/kuffiyeh_olive_leaves.png");
 	background-repeat: repeat;
 	background-size: 50px;
 	margin: 20px 0px;
@@ -60,7 +60,7 @@ header{
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: space-between;
-	background-image: url("/assets/images/homepage_photos/photo_0.jpg");
+	background-image: url("../images/homepage_photos/photo_0.jpg");
 	background-position-y: center;
 	background-size: cover;
 	position: relative;

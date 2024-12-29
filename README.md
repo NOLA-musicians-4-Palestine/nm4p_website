@@ -6,6 +6,7 @@ layout: readme
 
 To deploy this site from the `live` branch using the [included action](.github/workflows/pages-deploy.yml), click the **Settings** tab and the **Pages** section (or [here](../../settings/pages)) and ensure the **Source** is set to "Github Actions"
 
+> ** Developer Note: ** to support deployments on other domains such as forks, use relative URL's in template content.
 
 # site structure and status
 

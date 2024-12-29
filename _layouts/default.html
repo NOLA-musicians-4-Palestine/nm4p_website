@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }}</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-	<link rel="icon" type="image/x-icon" href="/assets/images/logo-favicon.png">
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <link rel="icon"
+          type="image/x-icon"
+          href="{{ '/assets/images/logo-favicon.png' | relative_url }}">
   </head>
   <body>
-  	<div id="site-url" style="display: none;">{{ site.url }}</div>
-	<header data-num-images="5">
-		<div id="header-img-mask"></div>
-		<h1 id="title">{{ site.title }}</h1>  
-		{% include nav.html %}
-	</header>
-	<script src="/assets/js/header_images.js"></script>
-	{% include flag.html %}
+    <div id="site-url" style="display: none;">{{ site.url }}{{ site.baseurl }}</div>
+    <header data-num-images="5">
+      <div id="header-img-mask"></div>
+      <h1 id="title">{{ site.title }}</h1>  
+      {% include nav.html %}
+    </header>
+    <script src="{{ '/assets/js/header_images.js' | relative_url }}"></script>
+    {% include flag.html %}
     <main>
-		{{ content }}
-	</main>
-	{% include flag.html %}
-	<footer>
-	{% include footer.html %}
-	</footer>
+      {{ content }}
+    </main>
+    {% include flag.html %}
+    <footer>
+      {% include footer.html %}
+    </footer>
   </body>
 </html>
