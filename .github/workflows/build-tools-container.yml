@@ -23,19 +23,27 @@ jobs:
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
+      # Step 2.5 Save the repo, owner, and ref (branch) names as strings of all lowercase characters
+      - name: Set lowercase repo, owner, and ref names
+        id: set-lowercase-names
+        run: |
+          echo "::set-output name=repo_lowercase::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
+          echo "::set-output name=owner_lowercase::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
+          echo "::set-output name=ref_lowercase::$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]')"
+
       # Step 3: Try pulling the existing image (if it exists)
       - name: Pull existing image (if available)
         continue-on-error: true  # Continue even if the image doesn't exist
         run: |
-          docker pull ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }} || echo "No existing image found"
+          docker pull ghcr.io/${{ steps.set-lowercase-names.outputs.owner_lowercase }}/${{ steps.set-lowercase-names.outputs.repo_lowercase }}/tools:${{ steps.set-lowercase-names.outputs.ref_lowercase }} || echo "No existing image found"
 
       # Step 4: Build Docker image (will use cached layers if pull was successful)
       - name: Build Docker image
         run: |
           docker build -f tools/Containerfile \
-            -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }} tools
+            -t ghcr.io/${{ steps.set-lowercase-names.outputs.owner_lowercase }}/${{ steps.set-lowercase-names.outputs.repo_lowercase }}/tools:${{ steps.set-lowercase-names.outputs.ref_lowercase }} tools
 
       # Step 5: Push the image to GHCR
       - name: Push Docker image to GHCR
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }}
+          docker push ghcr.io/${{ steps.set-lowercase-names.outputs.owner_lowercase }}/${{ steps.set-lowercase-names.outputs.repo_lowercase }}/tools:${{ steps.set-lowercase-names.outputs.ref_lowercase }}
