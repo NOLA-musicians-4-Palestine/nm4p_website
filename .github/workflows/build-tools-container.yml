@@ -13,6 +13,10 @@ on:
 jobs:
   build-and-push-tools-container:
     runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
