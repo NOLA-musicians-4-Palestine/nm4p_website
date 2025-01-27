@@ -31,9 +31,9 @@ jobs:
       - name: Set lowercase repo, owner, and ref names
         id: set-lowercase-names
         run: |
-          echo "::set-output name=repo_lowercase::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
-          echo "::set-output name=owner_lowercase::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
-          echo "::set-output name=ref_lowercase::$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]')"
+          echo "repo_lowercase=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+          echo "owner_lowercase=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+          echo "ref_lowercase=$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
 
       # Step 3: Try pulling the existing image (if it exists)
       - name: Pull existing image (if available)
