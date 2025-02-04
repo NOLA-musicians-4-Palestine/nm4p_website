@@ -24,6 +24,28 @@
 
 </div>
 <div id="calendar" class="net-pattern-bg">
+
+
+
+<div id="events-directory">
+	{% for event in site.events %}
+		<div
+			id="event-{{ forloop.index0 }}"
+			class="event-info"
+			data-date="{{ event.date | date: '%Y%m%d' }}"
+			data-org="{{ event.orgOrBandName }}"
+			data-title="{{ event.title }}"
+			data-location="{{ event.location }}"
+			data-url="{{ event.url }}"
+		>EVENT INFO IN DIV DATA</div>
+	{% endfor %}
+</div>
+
+
+<script>
+	// get first 5 events in event directory that are after today (pull their flyer and content)
+</script>
+
 {% for event in site.events %}
 	<div id="event-{{ forloop.index0 }}" class="event" data-date="{{ event.date | date: '%Y%m%d' }}">
 		<img class="flyer"src="assets/images/event_flyers/{{ event.flyer }}">
