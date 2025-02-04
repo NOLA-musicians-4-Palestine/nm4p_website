@@ -9,6 +9,7 @@ exclude:
 
 collections:
   events:
+    output: true
   songs:
     output: true
 
@@ -30,3 +31,8 @@ defaults:
       type: "songs"
     values:
       layout: "song"
+
+  - scope:
+      type: "events"
+    values:
+      layout: "event-snippet"

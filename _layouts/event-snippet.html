@@ -1,0 +1,29 @@
+---
+---
+	<div class="event" data-date="{{ page.date | date: '%Y%m%d' }}">
+		<img class="flyer"src="/assets/images/event_flyers/{{ page.flyer }}">
+		<div class="info">
+			<div class="orgOrBand">
+				<h3>Who:</h3>
+				{{ page.orgOrBandName }}
+			</div>
+			<div class="title">
+				<h3>What:</h3>
+				{{ page.title }}
+			</div>
+			{% if page.location %}
+			<div class="location">
+				<h3>Where:</h3>
+				{{ page.location }}
+			</div>
+			{% endif %}
+			{% if page.date %}
+			<div class="date-and-time">
+				<h3>When:</h3>
+				{{ page.date | date: "%A, %b %d %Y"}} {{ page.time }}
+			</div>
+			{% endif %}
+			<div class="description">{{ content }}</div>
+			<a class="link" href="{{ page.link }}">{{ page.link_text }}</a>
+		</div>
+	</div>
