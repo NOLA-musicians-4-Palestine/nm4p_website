@@ -26,9 +26,10 @@ concurrency:
 
 jobs:
   build:
+    # if: github.ref == 'refs/heads/live'
+
     environment:
       name: github-pages
-    if: github.ref == 'refs/heads/live'
 
     runs-on: ubuntu-latest
     steps:
