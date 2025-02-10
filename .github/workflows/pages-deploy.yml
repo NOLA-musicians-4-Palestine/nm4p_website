@@ -36,6 +36,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Save the repo, owner, and ref (branch) names as strings of all lowercase characters
+      - name: Set lowercase repo, owner, and ref names
+        id: lower
+        run: |
+          echo "repo=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+          echo "owner=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+          echo "ref=$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+
 #     - name: Setup Pages
 #       id: pages
 #       uses: actions/configure-pages@v5
@@ -57,7 +65,7 @@ jobs:
           docker run --rm \
           -w /workspace \
           -v ${{ github.workspace }}:/workspace \
-          ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }} \
+          ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
           python tools/sync_calendars.py
 
 #     - name: Build with Jekyll
