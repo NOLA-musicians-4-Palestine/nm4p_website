@@ -36,19 +36,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        if: github.ref == 'refs/heads/live'
-        id: pages
-        uses: actions/configure-pages@v5
+#     - name: Setup Pages
+#       id: pages
+#       uses: actions/configure-pages@v5
 
-      - name: generate CNAME file if a custom domain is defined for the repository
-        if: github.ref == 'refs/heads/live'
-        run: |
-          CUSTOM_DOMAIN=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/pages | jq -r '.cname')
-          if [ "$CUSTOM_DOMAIN" != "null" ]; then
-            echo "$CUSTOM_DOMAIN" | tee CNAME
-          fi
+#     - name: generate CNAME file if a custom domain is defined for the repository
+#       run: |
+#         CUSTOM_DOMAIN=$(curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+#           https://api.github.com/repos/${{ github.repository }}/pages | jq -r '.cname')
+#         if [ "$CUSTOM_DOMAIN" != "null" ]; then
+#           echo "$CUSTOM_DOMAIN" | tee CNAME
+#         fi
 
       - name: Inject OAuth Token
         run: |
@@ -62,16 +60,15 @@ jobs:
           ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/tools:${{ github.ref_name }} \
           python tools/sync_calendars.py
 
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
+#     - name: Build with Jekyll
+#       uses: actions/jekyll-build-pages@v1
+#       with:
+#         source: ./
+#         destination: ./_site
 
-      - name: Upload artifact
-        if: github.ref == 'refs/heads/live'
-        # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v3
+#     - name: Upload artifact
+#       # Automatically uploads an artifact from the './_site' directory by default
+#       uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
