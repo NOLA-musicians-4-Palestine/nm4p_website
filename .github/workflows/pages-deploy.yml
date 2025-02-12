@@ -17,6 +17,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  packages: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -35,6 +36,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
 
       # Save the repo, owner, and ref (branch) names as strings of all lowercase characters
       - name: Set lowercase repo, owner, and ref names
@@ -59,6 +61,10 @@ jobs:
       - name: Inject OAuth Token
         run: |
           echo -n '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' > ${{ github.workspace }}/token.json
+        
+      - name: Authenticate to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Run a simple python file to confirm the container runs
         run: |
