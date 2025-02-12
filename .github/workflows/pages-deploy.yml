@@ -58,7 +58,7 @@ jobs:
 
       - name: Inject OAuth Token
         run: |
-          echo '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}'
+          echo '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' | wc -m
           echo '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' > ${{ github.workspace }}/token.json
 
       - name: Fetch and Render Events from Google Calendar
