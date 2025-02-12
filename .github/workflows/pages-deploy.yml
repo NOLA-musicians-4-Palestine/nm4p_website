@@ -60,13 +60,21 @@ jobs:
         run: |
           echo -n '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' > ${{ github.workspace }}/token.json
 
-      - name: Fetch and Render Events from Google Calendar
+      - name: Run a simple python file to confirm the container runs
         run: |
           docker run --rm \
           -w /workspace \
           -v ${{ github.workspace }}:/workspace \
           ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
-          python tools/sync_calendars.py
+          python tools/test.py
+
+#     - name: Fetch and Render Events from Google Calendar
+#       run: |
+#         docker run --rm \
+#         -w /workspace \
+#         -v ${{ github.workspace }}:/workspace \
+#         ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
+#         python tools/sync_calendars.py
 
 #     - name: Build with Jekyll
 #       uses: actions/jekyll-build-pages@v1
