@@ -34,6 +34,8 @@ def fetch_events(service):
         events = []
         # Define the time range for future events (from now onwards)
         now = datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
+        #now = datetime.now(datetime.timezone.utc).isoformat() + "Z" # maybe this is better because the other way is deprecated
+        #one_week_from_now = now
 
         # here's all the events
         calendar_list = service.calendarList().list().execute()
