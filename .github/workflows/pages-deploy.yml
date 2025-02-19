@@ -74,15 +74,15 @@ jobs:
           ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
           python tools/sync_calendars.py
 
-     - name: Build with Jekyll
-       uses: actions/jekyll-build-pages@v1
-       with:
-         source: ./
-         destination: ./_site
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
 
-     - name: Upload artifact
-       # Automatically uploads an artifact from the './_site' directory by default
-       uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        # Automatically uploads an artifact from the './_site' directory by default
+        uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
