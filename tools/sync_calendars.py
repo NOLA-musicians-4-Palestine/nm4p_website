@@ -22,7 +22,7 @@ def google_creds():
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
     if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
+        creds.refresh(Request()) # Using the Refresh token this way causes a crash
         with open("token.json", "w") as token:
             token.write(creds.to_json())
 
