@@ -1,0 +1,53 @@
+name: Build and Push Tools to GitHub Container Registry
+
+on:
+  push:
+    branches:
+      - main
+      - '*'  # Adjust as needed for your branch patterns
+  pull_request:
+    branches:
+      - main
+      - 'feature/*'
+
+jobs:
+  build-and-push-tools-container:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to GitHub Container Registry (GHCR)
+      - name: Authenticate to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      # Step 2.5 Save the repo, owner, and ref (branch) names as strings of all lowercase characters
+      - name: Set lowercase repo, owner, and ref names
+        id: set-lowercase-names
+        run: |
+          echo "repo_lowercase=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+          echo "owner_lowercase=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+          echo "ref_lowercase=$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]')" >>$GITHUB_OUTPUT
+
+      # Step 3: Try pulling the existing image (if it exists)
+      - name: Pull existing image (if available)
+        continue-on-error: true  # Continue even if the image doesn't exist
+        run: |
+          docker pull ghcr.io/${{ steps.set-lowercase-names.outputs.owner_lowercase }}/${{ steps.set-lowercase-names.outputs.repo_lowercase }}/tools:${{ steps.set-lowercase-names.outputs.ref_lowercase }} || echo "No existing image found"
+
+      # Step 4: Build Docker image (will use cached layers if pull was successful)
+      - name: Build Docker image
+        run: |
+          docker build -f tools/Containerfile \
+            -t ghcr.io/${{ steps.set-lowercase-names.outputs.owner_lowercase }}/${{ steps.set-lowercase-names.outputs.repo_lowercase }}/tools:${{ steps.set-lowercase-names.outputs.ref_lowercase }} tools
+
+      # Step 5: Push the image to GHCR
+      - name: Push Docker image to GHCR
+        run: |
+          docker push ghcr.io/${{ steps.set-lowercase-names.outputs.owner_lowercase }}/${{ steps.set-lowercase-names.outputs.repo_lowercase }}/tools:${{ steps.set-lowercase-names.outputs.ref_lowercase }}
