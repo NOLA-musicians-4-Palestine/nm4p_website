@@ -57,5 +57,6 @@ Drums (Malfuf |D--T--T-|) and chanting on Cue
 
 Song 3 - Wein 3a Ramallah
 Loop |: A, B :| (with internal repeats) until ending cue (rit.)
+If we have vocals, alternate AB vocal, AB Instrumental
 
 ```

@@ -21,11 +21,13 @@ Intro - Claps and Vocal call + response |T-T-T-T-|T-T-TTT-|
 Chorus [A] - All Play (Rhythm: Malfuf |D--T--T-|)
 Feature [B] - Point to feature for instrumental call + response
 
-Loop |: A, B :|
+Loop |: Feature :| Chorus (leve, leve) on cue
 
 Cue Drums (stay on malfuf) for chants
 
-come back to Loop A
+Enter back into the song the same as the beginning - Stop on "Krosas" and immediately play the chorus instrumentally
+
+Loop |: Feature :| Chorus (leve, leve) on cue
 
 Cue Claps and vocals (like intro)
 ```

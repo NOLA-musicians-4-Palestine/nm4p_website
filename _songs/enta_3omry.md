@@ -10,9 +10,6 @@ status: current
 arranger: Simon Moushabeck
 ---
 
-## Context
-Umm Kulthum is the GOAT
-
 ## Form/Arrangement Notes
 
 ```
@@ -26,10 +23,15 @@ B'' - Mids have melody
 Repeat B, Point to individuals/sections for feature, play backgrounds if not featured
 Take 2nd ending of B'' on Cue
 
+If 2nd ending is Cued at the end of B or B', it takes the place of the last two measures of the section, just like for B''
+
+---------------
+Optional Taqsim
+---------------
+
 ---- part 2 -----
 
-Drums start with slow Maksum for chants |DT-TD-T-|
-After chants Drums speed up a lot for C
+Drums start with double time Maksum |DT-TD-T-|
 
 Loop |: CD :| until Cue to tag at the end of D
 ```
