@@ -1,12 +1,10 @@
 ---
 layout: band
 ---
-## Upcoming Rehearsals:
+## Upcoming Events:
 
-- Thusday, 1/2, 7:30-9:30p
-- Sunday, 1/5,2-4p.
-
-Location: Architect Alley/Street
+- Saturday 3/1 12:00 - 213 S. Clark St. - Endymius
+- Monday 3/3 meet:11 roll:12 - 750 Homer Plessy Way (mural) - Lundi Gras Krewe of Zeitoun
 
 ## Rep List
 ### Current Rep
