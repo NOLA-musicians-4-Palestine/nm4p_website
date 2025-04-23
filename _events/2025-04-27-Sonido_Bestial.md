@@ -1,5 +1,5 @@
 ---
-title: Sonido Bestial: Conjunto Tierra Linda, Yeyo & Shabbakano
+title: Sonido Bestial with Conjunto Tierra Linda, Yeyo & Shabbakano
 orgOrBandName: 
 date: 2025-04-27
 time: 7pm
