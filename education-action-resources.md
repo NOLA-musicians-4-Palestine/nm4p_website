@@ -42,3 +42,4 @@ layout: education-action-resources
 - [Monday, Sept. 30th, Al Jazeera report. The zionist entity attacked Lebanon, Yemen, Gaza, and Syria within the span of 24 hours](https://www.instagram.com/reel/DAi177FNtfe/?igsh=bDhqazhoMG1zMzhw)
 - [IsNOTreal bombing of Yemen](https://www.instagram.com/p/DAjdDkxCl_b/?igsh=MThya2c0ZnB3OG90Ng==)
 - [The Physical and Metaphorical Flattening of Lebanon](https://www.instagram.com/p/DAodzCmy0ZL/?igsh=MXRjdG0zbTFjZTBraw==)
+- [Collected resources about Africa's decolonization process](/africa_connections.html)
