@@ -1,6 +1,6 @@
 ---
-title: Wavering + The GET
-orgOrBandName: 
+title: 
+orgOrBandName: Wavering + The GET
 date: 2025-05-22
 time: 7pm
 location: Tigermen Den
