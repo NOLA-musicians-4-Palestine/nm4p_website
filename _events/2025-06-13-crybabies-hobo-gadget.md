@@ -1,5 +1,5 @@
 ---
-title: The Crybabies + Hobo Gadget Junk Band at Saturn Bar
+title: Spooky Swing Dance Night
 orgOrBandName: The Crybabies + Hobo Gadget Junk Band
 date: 2025-06-13
 time: 8
