@@ -1,10 +1,10 @@
 ---
 layout: band
 ---
+
 ## Upcoming Events:
 
-- Saturday 3/1 12:00 - 213 S. Clark St. - Endymius
-- Monday 3/3 meet:11 roll:12 - 750 Homer Plessy Way (mural) - Lundi Gras Krewe of Zeitoun
+(this will be updated soon...)
 
 ## Rep List
 ### Current Rep
