@@ -1,3 +1,5 @@
 .jekyll-cache/*
 assets/recordings/src/*
 _site/*
+tools/credentials.json
+tools/token.json
