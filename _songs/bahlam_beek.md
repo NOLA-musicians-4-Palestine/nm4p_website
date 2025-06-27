@@ -23,7 +23,7 @@ Melody: over Maksoum |DT-TD-T-|
 
 Vocals:
 	highs have the melody, mids have the responses
-	m. 54 has a half flat, just play it full flat.
+    first half of melody phrases is solo, second half is everyone.
 	DO NOT PLAY M. 57, that's only for the very end.
 
 Form:
@@ -31,6 +31,6 @@ Form:
 	at the end of m.56 to to Drums
 		Maksoum |DT-TD-T-| OR Chiftitelli |D--T--T-D---T---| depending on vibe
 		Chants or Taqsim
-	Play the whole song down again except the intro.
-	End on M. 57, but change that interval to an octave (2nd note of the measure should be A, third note G)
+	Play the whole song down again starting from melody (skip intro)
+	End on M. 57
 ```

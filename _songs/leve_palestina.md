@@ -16,10 +16,9 @@ Swedish band Kofia, lyrics say "free palestine and crush zionism"
 
 ```
 Intro - Claps and Vocal call + response |T-T-T-T-|T-T-TTT-|
-	(yea, not what the chart says... ignore the intro there)
 	Stop/hit on last "Krossas" of response before we enter the Chorus "Leve, Leve" - but instrumental
-Chorus [A] - All Play (Rhythm: Malfuf |D--T--T-|)
-Feature [B] - Point to feature for instrumental call + response
+Chorus - All Play (Rhythm: Malfuf |D--T--T-|), usually played only one time!
+Feature - Point to feature for instrumental call + response
 
 Loop |: Feature :| Chorus (leve, leve) on cue
 
@@ -30,4 +29,6 @@ Enter back into the song the same as the beginning - Stop on "Krosas" and immedi
 Loop |: Feature :| Chorus (leve, leve) on cue
 
 Cue Claps and vocals (like intro)
+
+Optional: one last chorus con gusto!
 ```
