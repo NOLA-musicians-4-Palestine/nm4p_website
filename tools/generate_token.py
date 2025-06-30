@@ -11,7 +11,7 @@ SCOPES = [
 def main():
     # Load the OAuth credentials file
     flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-    creds = flow.run_local_server(port=42669)
+    creds = flow.run_local_server(port=42669, access_type="offline", prompt="consent")
 
     # Save the credentials for future use
     with open("token.json", "w") as token:
