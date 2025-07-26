@@ -1,6 +1,5 @@
 ---
 title: No More Events On Our Radar
-orgOrBandName: Nola Musicians for Palestine
 date: 2030-01-01
 time: 
 location: 
