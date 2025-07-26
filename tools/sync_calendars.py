@@ -45,7 +45,7 @@ def fetch_events(service):
         for event in events:
             start = event["start"].get(
                 "dateTime", event["start"].get("date")
-            )  # what is this?
+            )
             print(f"{start} - {event['summary']}")
 
         return events
@@ -115,7 +115,7 @@ def event_as_post(event, drive_service):
 
     post.metadata["title"] = event["summary"]
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
-    post.metadata["date"] = f"{{ {event['start']} | date_to_string }}"
+    post.metadata["date"] = f"{{ {day} | date_to_string }}"
     post.metadata["time"] = f"{start_time} - {end_time}"
     post.metadata["location"] = event["location"]
     post.content = event.get("description", event["summary"])
