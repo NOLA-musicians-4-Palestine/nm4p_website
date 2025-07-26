@@ -31,9 +31,16 @@ def fetch_events(service):
         # here's all the events
         calendar_list = service.calendarList().list().execute()
         calendars = calendar_list.get("items", [])
-        print("printing the calendars:")
-        print(calendars)
 
+        target_calendar_id = "0b3ffa27ffe7ad1f5e25331bfddc2f1b3352f7fad89712b24761041cdfa8fb3f@group.calendar.google.com"
+        events_result = calendar_service.events().list(calendarId=target_calendar_id).execute()
+        events = events_result.get("items", [])
+
+        print("events way:")
+        for event in events:
+            print(event["summary"])
+
+        print("calendars way")
         for calendar in calendars:
             print(
                 f"Calendar Summary: {calendar['summary']}, Calendar ID: {calendar['id']}"
