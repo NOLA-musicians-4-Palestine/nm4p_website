@@ -3,4 +3,5 @@ assets/recordings/src/*
 _site/*
 tools/credentials.json
 tools/token.json
+tools/service-account-file.json
 *.swp

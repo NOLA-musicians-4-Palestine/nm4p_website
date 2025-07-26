@@ -31,6 +31,8 @@ def fetch_events(service):
         # here's all the events
         calendar_list = service.calendarList().list().execute()
         calendars = calendar_list.get("items", [])
+        print("printing the calendars:")
+        print(calendars)
 
         for calendar in calendars:
             print(
@@ -52,7 +54,7 @@ def fetch_events(service):
             events.extend(events_result.get("items", []))
 
         # Check if any events are found
-        if not events[0]:
+        if not events:
             print("No upcoming events found.")
             return []
 
