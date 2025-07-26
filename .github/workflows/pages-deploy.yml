@@ -60,7 +60,8 @@ jobs:
 
       - name: Inject OAuth Token
         run: |
-          echo -n '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' > ${{ github.workspace }}/token.json
+          echo -n '${{ secrets.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS }}' > ${{ github.workspace }}/token.json
+          # echo -n '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' > ${{ github.workspace }}/token.json
         
       - name: Authenticate to GitHub Container Registry
         run: |
@@ -72,7 +73,8 @@ jobs:
           -w /workspace \
           -v ${{ github.workspace }}:/workspace \
           ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
-          python tools/sync_calendars.py
+          # python tools/sync_calendars.py
+          python tools/test_service_account.py
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
