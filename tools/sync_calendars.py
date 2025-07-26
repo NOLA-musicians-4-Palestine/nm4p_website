@@ -31,7 +31,7 @@ def fetch_events(service):
         #now = datetime.now(datetime.timezone.utc).isoformat() + "Z" # maybe this is better because the other way is deprecated
         #one_week_from_now = now
 
-        # this is the id of the calendar called "Events"
+        # this is the id of the calendar called "Solidarity Network"
         target_calendar_id = "0b3ffa27ffe7ad1f5e25331bfddc2f1b3352f7fad89712b24761041cdfa8fb3f@group.calendar.google.com"
         events_result = service.events().list(calendarId=target_calendar_id).execute()
         events = events_result.get("items", [])
@@ -117,6 +117,7 @@ def event_as_post(event, drive_service):
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
     post.metadata["date"] = f"{{ {event['start']} | date_to_string }}"
     post.metadata["time"] = f"{start_time} - {end_time}"
+    post.metadata["location"] = event["location"]
     post.metadata["orgOrBandName"] = event["organizer"].get(
         "displayName", event["organizer"]["email"]
     )

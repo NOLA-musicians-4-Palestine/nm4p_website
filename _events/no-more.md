@@ -5,8 +5,6 @@ date: 2030-01-01
 time: 
 location: 
 flyer: no-more.png
-link: mailto@nolamusicians4palestine@gmail.com
-link_text: Email Us!
 ---
 
 If you don't see an event that's supposed to be here, please let us know.
