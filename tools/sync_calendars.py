@@ -28,39 +28,10 @@ def fetch_events(service):
         #now = datetime.now(datetime.timezone.utc).isoformat() + "Z" # maybe this is better because the other way is deprecated
         #one_week_from_now = now
 
-        # here's all the events
-        calendar_list = service.calendarList().list().execute()
-        calendars = calendar_list.get("items", [])
-
-        """
+        # this is the id of the calendar called "Events"
         target_calendar_id = "0b3ffa27ffe7ad1f5e25331bfddc2f1b3352f7fad89712b24761041cdfa8fb3f@group.calendar.google.com"
         events_result = service.events().list(calendarId=target_calendar_id).execute()
         events = events_result.get("items", [])
-
-        print("events way:")
-        for event in events:
-            print(event["summary"])
-        """
-
-        print("calendars way")
-        for calendar in calendars:
-            print(
-                f"Calendar Summary: {calendar['summary']}, Calendar ID: {calendar['id']}"
-            )
-            # Call the Calendar API to fetch events
-            events_result = (
-                service.events()
-                .list(
-                    calendarId=calendar["id"],
-                    timeMin=now,
-                    singleEvents=True,
-                    orderBy="startTime",
-                )
-                .execute()
-            )
-
-            # Get the list of events
-            events.extend(events_result.get("items", []))
 
         # Check if any events are found
         if not events:
