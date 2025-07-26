@@ -3,7 +3,7 @@ from google.oauth2 import service_account
 
 creds = service_account.Credentials.from_service_account_file(
     "token.json",
-    ["https://www.googleapis.com/auth/calendar.readonly"]
+    scopes=["https://www.googleapis.com/auth/calendar.readonly"]
 )
 
 calendar_service = build("calendar", "v3", credentials=creds)
