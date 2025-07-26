@@ -61,7 +61,6 @@ jobs:
       - name: Inject OAuth Token
         run: |
           echo -n '${{ secrets.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS }}' > ${{ github.workspace }}/token.json
-          # echo -n '${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}' > ${{ github.workspace }}/token.json
         
       - name: Authenticate to GitHub Container Registry
         run: |
