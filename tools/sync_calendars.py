@@ -10,23 +10,14 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from google.oauth2 import service_account
 
 
 def google_creds():
-    SCOPES = [
-        "https://www.googleapis.com/auth/drive.readonly",
-        "https://www.googleapis.com/auth/calendar.readonly",
-    ]
-
-    creds = None
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request()) # Using the Refresh token this way causes a crash
-        with open("token.json", "w") as token:
-            token.write(creds.to_json())
-
-    return creds
+    return service_account.Credentials.from_service_account_file(
+        "service-account-file.json",
+        scopes=["https://www.googleapis.com/auth/calendar.readonly"]
+    )
 
 
 def fetch_events(service):
