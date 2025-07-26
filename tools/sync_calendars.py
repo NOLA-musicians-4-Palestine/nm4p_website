@@ -16,7 +16,10 @@ from google.oauth2 import service_account
 def google_creds():
     return service_account.Credentials.from_service_account_file(
         "service-account-file.json",
-        scopes=["https://www.googleapis.com/auth/calendar.readonly"]
+        scopes=[
+            "https://www.googleapis.com/auth/calendar.readonly",
+            "https://www.googleapis.com/auth/drive.readonly",
+        ]
     )
 
 
