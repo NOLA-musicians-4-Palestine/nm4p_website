@@ -1,20 +1,7 @@
-import frontmatter
-import os
-import pytz
-import yaml
-from googleapiclient.http import MediaIoBaseDownload
-from slugify import slugify
-from datetime import datetime
-from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-# from googleapiclient.discovery import build
 from google.oauth2 import service_account
 
 creds = service_account.Credentials.from_service_account_file(
-    #"service-account-file.json",
     "token.json",
     scopes=["https://www.googleapis.com/auth/calendar.readonly"]
 )
