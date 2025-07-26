@@ -73,8 +73,8 @@ jobs:
           -w /workspace \
           -v ${{ github.workspace }}:/workspace \
           ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
-          # python tools/sync_calendars.py
-          python tools/test_service_account.py
+          python tools/sync_calendars.py
+          # python tools/test_service_account.py
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
