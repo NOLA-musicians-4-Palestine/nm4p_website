@@ -100,14 +100,18 @@ def read_event_template(path):
 def read_event_date(date):
     try:
         timezone = pytz.timezone(date["timeZone"])
+        print("TZ good")
         dateTime = datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
+        print("DT good")
         return dateTime
     except KeyError:
         return datetime(1970, 1, 1)
 
 
 def event_as_post(event, drive_service):
+    print(event["start"])
     day = read_event_date(event["start"]).strftime("%Y-%m-%d")
+    print(day)
     start_time = read_event_date(event["start"]).strftime("%I:%M%p")
     end_time = read_event_date(event["end"]).strftime("%I:%M%p")
 
@@ -115,7 +119,7 @@ def event_as_post(event, drive_service):
 
     post.metadata["title"] = event["summary"]
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
-    post.metadata["date"] = f"{{ {day} | date_to_string }}"
+    post.metadata["date"] = f"{{ {event['start']} | date_to_string }}"
     post.metadata["time"] = f"{start_time} - {end_time}"
     post.metadata["location"] = event["location"]
     post.content = event.get("description", event["summary"])
