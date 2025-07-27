@@ -99,6 +99,8 @@ def read_event_template(path):
 
 def read_event_date(date):
     try:
+        # if "timeZone" in date
+        # one problem is that this key doesn't exist when the date doesn't come with a timezone
         timezone = pytz.timezone(date["timeZone"])
         print("TZ good")
         dateTime = datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
