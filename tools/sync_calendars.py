@@ -137,7 +137,7 @@ def run():
     posts = [event_as_post(event, drive_service) for event in events]
     for post in posts:
         if post.metadata["flyer"]:
-            post_path = f"./_events/{post.metadata['ymd'}-{slugify(post.metadata['title'])}.html"
+            post_path = f"./_events/{post.metadata['ymd']}-{slugify(post.metadata['title'])}.html"
             with open(post_path, "w") as f:
                 f.write(frontmatter.dumps(post))
                 f.write(f"post path: {post_path}")
