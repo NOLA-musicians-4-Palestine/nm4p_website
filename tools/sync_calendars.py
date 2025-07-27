@@ -99,9 +99,10 @@ def read_event_template(path):
 
 def read_event_date(date):
     try:
-        # if "timeZone" in date
-        # one problem is that this key doesn't exist when the date doesn't come with a timezone
-        timezone = pytz.timezone(date["timeZone"])
+        # key doesn't exist when the date doesn't come with a timezone
+        timezone = pytz.timezone("US/Central"]) # default to nola time
+        if "timeZone" in date:
+            timezone = pytz.timezone(date["timeZone"])
         print("TZ good")
         dateTime = datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
         print("DT good")
@@ -111,9 +112,6 @@ def read_event_date(date):
 
 
 def event_as_post(event, drive_service):
-    print(event["start"])
-    day = read_event_date(event["start"]).strftime("%Y-%m-%d")
-    print(day)
     start_time = read_event_date(event["start"]).strftime("%I:%M%p")
     end_time = read_event_date(event["end"]).strftime("%I:%M%p")
 
@@ -122,6 +120,7 @@ def event_as_post(event, drive_service):
     post.metadata["title"] = event["summary"]
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
     post.metadata["date"] = f"{{ {event['start']} | date_to_string }}"
+    post.metadata["ymd"] = read_event_date(event["start"]).strftime("%Y-%m-%d")
     post.metadata["time"] = f"{start_time} - {end_time}"
     post.metadata["location"] = event["location"]
     post.content = event.get("description", event["summary"])
@@ -138,7 +137,7 @@ def run():
     posts = [event_as_post(event, drive_service) for event in events]
     for post in posts:
         if post.metadata["flyer"]:
-            post_path = f"./_events/{day}-{slugify(post.metadata['title'])}.html"
+            post_path = f"./_events/{post.metadata['ymd'}-{slugify(post.metadata['title'])}.html"
             with open(post_path, "w") as f:
                 f.write(frontmatter.dumps(post))
                 f.write(f"post path: {post_path}")
