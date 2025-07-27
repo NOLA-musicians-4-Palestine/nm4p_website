@@ -100,7 +100,7 @@ def read_event_template(path):
 def read_event_date(date):
     try:
         # key doesn't exist when the date doesn't come with a timezone
-        timezone = pytz.timezone("US/Central"]) # default to nola time
+        timezone = pytz.timezone("US/Central") # default to nola time
         if "timeZone" in date:
             timezone = pytz.timezone(date["timeZone"])
         print("TZ good")
