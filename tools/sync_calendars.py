@@ -2,9 +2,9 @@ import frontmatter
 import os
 import pytz
 import yaml
+import datetime
 from googleapiclient.http import MediaIoBaseDownload
 from slugify import slugify
-from datetime import datetime
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google.oauth2 import service_account
@@ -128,10 +128,10 @@ def read_event_date(date):
         if "timeZone" in date:
             timezone = pytz.timezone(date["timeZone"])
 
-        dateTime = datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
+        dateTime = datetime.datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
         return dateTime
     except KeyError:
-        return datetime(1970, 1, 1)
+        return datetime.datetime(1970, 1, 1)
 
 
 def event_as_post(event, drive_service):
