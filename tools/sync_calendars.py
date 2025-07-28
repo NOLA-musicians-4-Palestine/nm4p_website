@@ -37,7 +37,7 @@ def fetch_events(service):
 
         # date bounds
         now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5)))#.isoformat()
-        one_month_from_now = now + datetime.timedelta(months=1)
+        one_month_from_now = now + datetime.timedelta(weeks=4)
 
         request = service.events().list(
             calendarId = target_calendar_id,
