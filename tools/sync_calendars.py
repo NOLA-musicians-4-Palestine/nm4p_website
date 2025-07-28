@@ -122,7 +122,8 @@ def event_as_post(event, drive_service):
     post.metadata["date"] = f"{{ {event['start']} | date_to_string }}"
     post.metadata["ymd"] = read_event_date(event["start"]).strftime("%Y-%m-%d")
     post.metadata["time"] = f"{start_time} - {end_time}"
-    post.metadata["location"] = event["location"]
+    if "location" in post.metadata:
+        post.metadata["location"] = event["location"]
     post.content = event.get("description", event["summary"])
 
     return post
