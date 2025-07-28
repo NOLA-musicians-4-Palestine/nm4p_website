@@ -22,29 +22,28 @@ def google_creds():
 
 def fetch_events(service):
     try:
-        events = []
-        # Define the time range for future events (from now onwards)
-        now = datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
-        #now = datetime.now(datetime.timezone.utc).isoformat() + "Z" # maybe this is better because the other way is deprecated
-        #one_week_from_now = now
-
         """
         Implement:
             [x] Pagination (untested)
             [x] recurring events (untested)
-            [ ] time filters
+            [x] time filters
         """
 
 
+
         # this is the id of the calendar called "Solidarity Network"
+        # could be a github environment variable
         target_calendar_id = "0b3ffa27ffe7ad1f5e25331bfddc2f1b3352f7fad89712b24761041cdfa8fb3f@group.calendar.google.com"
 
+        # date bounds
+        now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5)))#.isoformat()
+        one_month_from_now = now + datetime.timedelta(months=1)
 
         request = service.events().list(
             calendarId = target_calendar_id,
             singleEvents = True,
-            timeMin = tMin, # TODO
-            timeMax = tMax
+            timeMin = now.isoformat(),
+            timeMax = one_month_from_now.isoformat()
         )
 
         events = []
@@ -56,7 +55,7 @@ def fetch_events(service):
             # collect the items
             events = events + response.get("items", [])
 
-            # prepare a new request (it'll be null if there are no more
+            # prepare a new request (it'll be null if there are no more)
             request = service.events().list_next(request, response)
 
         # Check if any events are found
