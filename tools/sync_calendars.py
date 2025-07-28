@@ -5,11 +5,8 @@ import yaml
 from googleapiclient.http import MediaIoBaseDownload
 from slugify import slugify
 from datetime import datetime
-from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
 from google.oauth2 import service_account
 
 
@@ -31,10 +28,36 @@ def fetch_events(service):
         #now = datetime.now(datetime.timezone.utc).isoformat() + "Z" # maybe this is better because the other way is deprecated
         #one_week_from_now = now
 
+        """
+        Implement:
+            [x] Pagination (untested)
+            [x] recurring events (untested)
+            [ ] time filters
+        """
+
+
         # this is the id of the calendar called "Solidarity Network"
         target_calendar_id = "0b3ffa27ffe7ad1f5e25331bfddc2f1b3352f7fad89712b24761041cdfa8fb3f@group.calendar.google.com"
-        events_result = service.events().list(calendarId=target_calendar_id).execute()
-        events = events_result.get("items", [])
+
+
+        request = service.events().list(
+            calendarId = target_calendar_id,
+            singleEvents = True,
+            timeMin = tMin, # TODO
+            timeMax = tMax
+        )
+
+        events = []
+        
+        while request is not None:
+            # make the request
+            response = request.execute()
+
+            # collect the items
+            events = events + response.get("items", [])
+
+            # prepare a new request (it'll be null if there are no more
+            request = service.events().list_next(request, response)
 
         # Check if any events are found
         if not events:
@@ -44,7 +67,8 @@ def fetch_events(service):
         # Print the events
         for event in events:
             start = event["start"].get(
-                "dateTime", event["start"].get("date")
+                "dateTime",
+                event["start"].get("date")
             )
             print(f"{start} - {event['summary']}")
 
@@ -99,13 +123,13 @@ def read_event_template(path):
 
 def read_event_date(date):
     try:
-        # key doesn't exist when the date doesn't come with a timezone
+        # if we share this with places in other timezones, we should get the timezone from the calendar somehow
         timezone = pytz.timezone("US/Central") # default to nola time
+
         if "timeZone" in date:
             timezone = pytz.timezone(date["timeZone"])
-        print("TZ good")
+
         dateTime = datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
-        print("DT good")
         return dateTime
     except KeyError:
         return datetime(1970, 1, 1)
