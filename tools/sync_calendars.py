@@ -112,22 +112,7 @@ def read_event_template(path):
     return post
 
 
-# unused, will remove
-def read_event_date(date):
-    try:
-        # if we share this with places in other timezones, we should get the timezone from the calendar somehow
-        timezone = pytz.timezone("US/Central") # default to nola time
-
-        if "timeZone" in date:
-            timezone = pytz.timezone(date["timeZone"])
-
-        # all day events don't have date["datetime"], they only have date["date"]
-        dateTime = datetime.datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
-        return dateTime
-    except KeyError:
-        return datetime.datetime(1970, 1, 1)
-
-def get_day_from_event(event): #returns a datetime.date always
+def get_day_from_event(event): #returns datetime.date.isoformat() always
     start = event["start"]
     return start.get( # get the day as a date
         "date",
@@ -135,32 +120,32 @@ def get_day_from_event(event): #returns a datetime.date always
             "datetime",
             datetime.datetime(1970, 1, 1)
         ).date()
-    ) 
+    ).isoformat()
 
-def get_start_time_from_event(event): #returns a datetime.time or None
+def get_start_time_from_event(event): #returns a datetime.time.strftime(...) or None
     if not "datetime" in event["start"]:
         return None
 
-    return event["start"]["datetime"].time()
+    return event["start"]["datetime"].time().strftime("%I:%M%p")
 
-def get_end_time_from_event(event): #returns a datetime.time or None
+def get_end_time_from_event(event): #returns a datetime.time.strftime(...) or None
     if not "datetime" in event["start"]:
         return None
 
-    return event["end"]["datetime"].time()
+    return event["end"]["datetime"].time().strftime("%I:%M%p")
     
 
 def event_as_post(event, drive_service):
     is_all_day_event = "date" in event["start"]
 
     day = get_day_from_event(event)
-    start_time = get_start_time_from_event(event).strftime("%I:%M%p")
-    end_time = get_end_time_from_event(event).strftime("%I:%M%p")
+    start_time = get_start_time_from_event(event)
+    end_time = get_end_time_from_event(event)
 
     post = read_event_template("_events/no-more.md")
 
     post.metadata["title"] = event["summary"]
-    post.metadata["date"] = day.isoformat()
+    post.metadata["date"] = day
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
 
     if not is_all_day_event:
