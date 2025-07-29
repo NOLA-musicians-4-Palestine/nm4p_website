@@ -58,7 +58,7 @@ def fetch_events(service):
         # Print the events
         for event in events:
             print(event["summary"])
-            if("date" in event["start"])
+            if("date" in event["start"]):
                 print(type(event["start"]["date"]))
                 print(event["start"]["date"])
             else:
