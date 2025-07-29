@@ -122,7 +122,7 @@ def get_day_from_event(event): #returns datetime.date.isoformat() always
             "dateTime",
             datetime.datetime(1970, 1, 1)
         ).date()
-    ).isoformat()
+    ).isoformat() #HERE all these are strings make them actual date or dateTime objects
 
 def get_start_time_from_event(event): #returns a datetime.time.strftime(...) or None
     if not "dateTime" in event["start"]:
