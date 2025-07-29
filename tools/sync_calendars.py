@@ -63,7 +63,7 @@ def fetch_events(service):
             )
             print(f"{event['summary']}")
             print("event[start]:")
-            print(vars(start))
+            print(vars(event["start"]))
 
         return events
 
