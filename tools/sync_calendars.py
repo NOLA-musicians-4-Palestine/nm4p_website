@@ -61,7 +61,9 @@ def fetch_events(service):
                 "dateTime",
                 event["start"].get("date")
             )
-            print(f"{start} - {event['summary']}")
+            print(f"{event['summary']}")
+            print("event[start]:")
+            print(vars(start))
 
         return events
 
