@@ -57,6 +57,7 @@ def fetch_events(service):
 
         # Print the events
         for event in events:
+            print(type(event["start"]))
             print(event["start"])
 
         return events
