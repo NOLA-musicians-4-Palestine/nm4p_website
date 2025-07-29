@@ -62,8 +62,8 @@ def fetch_events(service):
                 print(type(event["start"]["date"]))
                 print(event["start"]["date"])
             else:
-                print(type(event["start"]["datetime"]))
-                print(event["start"]["datetime"])
+                print(type(event["start"]["dateTime"]))
+                print(event["start"]["dateTime"])
 
         return events
 
@@ -119,22 +119,22 @@ def get_day_from_event(event): #returns datetime.date.isoformat() always
     return start.get( # get the day as a date
         "date",
         start.get(
-            "datetime",
+            "dateTime",
             datetime.datetime(1970, 1, 1)
         ).date()
     ).isoformat()
 
 def get_start_time_from_event(event): #returns a datetime.time.strftime(...) or None
-    if not "datetime" in event["start"]:
+    if not "dateTime" in event["start"]:
         return None
 
-    return event["start"]["datetime"].time().strftime("%I:%M%p")
+    return event["start"]["dateTime"].time().strftime("%I:%M%p")
 
 def get_end_time_from_event(event): #returns a datetime.time.strftime(...) or None
-    if not "datetime" in event["start"]:
+    if not "dateTime" in event["start"]:
         return None
 
-    return event["end"]["datetime"].time().strftime("%I:%M%p")
+    return event["end"]["dateTime"].time().strftime("%I:%M%p")
     
 
 def event_as_post(event, drive_service):
