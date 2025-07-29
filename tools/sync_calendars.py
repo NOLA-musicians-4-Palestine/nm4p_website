@@ -22,21 +22,13 @@ def google_creds():
 
 def fetch_events(service):
     try:
-        """
-        Implement:
-            [x] Pagination (untested)
-            [x] recurring events (untested)
-            [x] time filters
-        """
-
-
 
         # this is the id of the calendar called "Solidarity Network"
         # could be a github environment variable
         target_calendar_id = "0b3ffa27ffe7ad1f5e25331bfddc2f1b3352f7fad89712b24761041cdfa8fb3f@group.calendar.google.com"
 
         # date bounds
-        now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5)))#.isoformat()
+        now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5)))
         one_month_from_now = now + datetime.timedelta(weeks=4)
 
         request = service.events().list(
@@ -120,6 +112,7 @@ def read_event_template(path):
     return post
 
 
+# unused, will remove
 def read_event_date(date):
     try:
         # if we share this with places in other timezones, we should get the timezone from the calendar somehow
@@ -128,25 +121,54 @@ def read_event_date(date):
         if "timeZone" in date:
             timezone = pytz.timezone(date["timeZone"])
 
+        # all day events don't have date["datetime"], they only have date["date"]
         dateTime = datetime.datetime.fromisoformat(date["dateTime"]).astimezone(timezone)
         return dateTime
     except KeyError:
         return datetime.datetime(1970, 1, 1)
 
+def get_day_from_event(event): #returns a datetime.date always
+    start = event["start"]
+    return start.get( # get the day as a date
+        "date",
+        start.get(
+            "datetime",
+            datetime.datetime(1970, 1, 1)
+        ).date()
+    ) 
+
+def get_start_time_from_event(event): #returns a datetime.time or None
+    if not "datetime" in event["start"]:
+        return None
+
+    return event["start"]["datetime"].time()
+
+def get_end_time_from_event(event): #returns a datetime.time or None
+    if not "datetime" in event["start"]:
+        return None
+
+    return event["end"]["datetime"].time()
+    
 
 def event_as_post(event, drive_service):
-    start_time = read_event_date(event["start"]).strftime("%I:%M%p")
-    end_time = read_event_date(event["end"]).strftime("%I:%M%p")
+    is_all_day_event = "date" in event["start"]
+
+    day = get_day_from_event(event)
+    start_time = get_start_time_from_event(event).strftime("%I:%M%p")
+    end_time = get_end_time_from_event(event).strftime("%I:%M%p")
 
     post = read_event_template("_events/no-more.md")
 
     post.metadata["title"] = event["summary"]
+    post.metadata["date"] = day.isoformat()
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
-    post.metadata["date"] = f"{{ {event['start']} | date_to_string }}"
-    post.metadata["ymd"] = read_event_date(event["start"]).strftime("%Y-%m-%d")
-    post.metadata["time"] = f"{start_time} - {end_time}"
+
+    if not is_all_day_event:
+        post.metadata["time"] = f"{start_time} - {end_time}"
+
     if "location" in event:
         post.metadata["location"] = event["location"]
+
     post.content = event.get("description", event["summary"])
 
     return post
@@ -161,7 +183,7 @@ def run():
     posts = [event_as_post(event, drive_service) for event in events]
     for post in posts:
         if post.metadata["flyer"]:
-            post_path = f"./_events/{post.metadata['ymd']}-{slugify(post.metadata['title'])}.html"
+            post_path = f"./_events/{post.metadata['date']}-{slugify(post.metadata['title'])}.html"
             with open(post_path, "w") as f:
                 f.write(frontmatter.dumps(post))
                 f.write(f"post path: {post_path}")
