@@ -168,7 +168,6 @@ def run():
             post_path = f"./_events/{post.metadata['date']}-{slugify(post.metadata['title'])}.html"
             with open(post_path, "w") as f:
                 f.write(frontmatter.dumps(post))
-                f.write(f"post path: {post_path}")
 
 
 # Example usage
