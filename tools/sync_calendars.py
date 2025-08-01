@@ -12,7 +12,7 @@ from google.oauth2 import service_account
 
 def google_creds():
     return service_account.Credentials.from_service_account_file(
-        "service-account-file.json",
+        "tools/service-account-file.json",
         scopes=[
             "https://www.googleapis.com/auth/calendar.readonly",
             "https://www.googleapis.com/auth/drive.readonly",
@@ -114,27 +114,28 @@ def read_event_template(path):
     return post
 
 
-def get_day_from_event(event): #returns datetime.date.isoformat() always
+def get_day_from_event(event): #returns datetime.date always
     start = event["start"]
-    return start.get( # get the day as a date
-        "date",
-        start.get(
-            "dateTime",
-            datetime.datetime(1970, 1, 1)
-        ).date()
-    ).isoformat() #HERE all these are strings make them actual date or dateTime objects
+    day_str = ""
+
+    if "date" in start:
+        day_str = start["date"]
+    elif "dateTime" in start:
+        day_str = start["dateTime"].split('T')[0]
+
+    return datetime.date.fromisoformat(day_str)
 
 def get_start_time_from_event(event): #returns a datetime.time.strftime(...) or None
     if not "dateTime" in event["start"]:
         return None
 
-    return event["start"]["dateTime"].time().strftime("%I:%M%p")
+    return datetime.datetime.fromisoformat(event["start"]["dateTime"]).time().strftime("%I:%M%p")
 
 def get_end_time_from_event(event): #returns a datetime.time.strftime(...) or None
     if not "dateTime" in event["start"]:
         return None
 
-    return event["end"]["dateTime"].time().strftime("%I:%M%p")
+    return datetime.datetime.fromisoformat(event["end"]["dateTime"]).time().strftime("%I:%M%p")
     
 
 def event_as_post(event, drive_service):
@@ -147,7 +148,7 @@ def event_as_post(event, drive_service):
     post = read_event_template("_events/no-more.md")
 
     post.metadata["title"] = event["summary"]
-    post.metadata["date"] = day
+    post.metadata["date"] = day.isoformat()
     post.metadata["flyer"] = get_first_image_attachment(event, drive_service)
 
     if not is_all_day_event:
