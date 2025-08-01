@@ -2,3 +2,7 @@
 assets/recordings/src/*
 _site/*
 .mscbackup/
+tools/credentials.json
+tools/token.json
+tools/service-account-file.json
+*.swp

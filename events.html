@@ -23,10 +23,6 @@
 	<div id="event-{{ forloop.index0 }}" class="event" data-date="{{ event.date | date: '%Y%m%d' }}">
 		<img class="flyer"src="assets/images/event_flyers/{{ event.flyer }}">
 		<div class="info">
-			<div class="orgOrBand">
-				<h3>Who:</h3>
-				{{ event.orgOrBandName }}
-			</div>
 			<div class="title">
 				<h3>What:</h3>
 				{{ event.title }}
@@ -44,7 +40,6 @@
 			</div>
 			{% endif %}
 			<div class="description">{{ event.content }}</div>
-			<a class="link" href="{{ event.link }}">{{ event.link_text }}</a>
 		</div>
 	</div>
 {% endfor %}
