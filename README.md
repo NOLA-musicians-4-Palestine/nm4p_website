@@ -43,6 +43,7 @@ To deploy this site from the `live` branch using the [included action](.github/w
     - [ ] make the qr code unique to each band
 - [ ] more photos
 - [ ] date-based navigation, filters
+- [ ] handle old events better
 - [ ] download events in batches of 10 dynamically
     - the pages are pre-rendered by jekyll, just not served
 - [ ] make something to show for when there are no upcoming events
@@ -53,4 +54,5 @@ To deploy this site from the `live` branch using the [included action](.github/w
 - [ ] files populated from google drive
 - [ ] Upcoming Rehearsals and Shows from a google sheet
 - [ ] chant list
-
+- [ ] make sure everything that needs to be environment variables are that way
+    - [ ] document how to clone the repository and make your own
