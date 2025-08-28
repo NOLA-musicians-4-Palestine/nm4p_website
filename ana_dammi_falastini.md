@@ -15,7 +15,7 @@ layout: ana_dammi_falastini
   }
 </style>
 
-<div style="display: flex; flex-direction: column; width: 100%; justify-content: center; padding-top: 12px; padding-bottom: 12px;">
+<div style="display: flex; flex-direction: column; width: 100%; justify-content: center; padding-top: 12px;">
   <div class="ana-container" style="width: 100%; justify-content: center;">
     <img style="height: 25rem; width: 25rem;" src="/assets/images/ana_dammi_falastini.jpg"/>
     <div style="padding-left: 20px;">
@@ -35,3 +35,17 @@ Recorded at the Material Institute and arranged by Simon Moushabeck, this releas
     </p>
   </div>
 </div>
+
+## Single release:
+* September, 5
+* Digital platforms: Bandcamp, Spotify, Apple Music, etc..
+
+## Release show:
+* September, 12
+* Location: Mudlark Theatre
+* Time: 8p
+
+## Further readings:
+
+- [Ana Dammi Falastini: A National(izing) Anthem](https://www.arabamerica.com/ana-dammi-falastini-a-nationalizing-anthem/)
+- [A song of existence: Mohammed Assaf’s “Dammi Falastini” and rebellion against colonization](https://berkeleybside.com/a-song-of-existence-mohammed-assafs-dammi-falastini-and-rebellion-against-colonization/)
