@@ -38,9 +38,9 @@ Yallah!
 
 Musicians:
 * Trumpets: David Buchbinder, Romain Beauxis
-* Saxophone: Cory Diane, Lexxxi Pink
-* Cornet: Amanda Blackshaw, Azad Safavi
-* Trombone: Glennon Davalos Stanton, Riley Goodemote, Susan Sakash
+* Saxophones: Cory Diane, Lexxxi Pink
+* Cornets: Amanda Blackshaw, Azad Safavi
+* Trombones: Glennon Davalos Stanton, Riley Goodemote, Susan Sakash
 * Mid-horn: Shaye Cohn
 * Accordion: Simon Moushabeck
 * Derboukas: Marco Saah, Jennifer Whitney
