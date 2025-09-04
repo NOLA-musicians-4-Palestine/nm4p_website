@@ -28,6 +28,35 @@ This September 5, Hanoun Brass Band will be releasing their first single, an arr
 
 Recorded at the Material Institute and arranged by Simon Moushabeck, this release reminds us that Palestinians are still denied agency, dignity and self-determination. In a world where musical instruments are banned from entering Gaza for "security reasons" and music teachers are using the sound of military drones to teach the next generation of musicians, Hanoun Brass Band and New Orleans Musicians for Palestine stand in support of Palestinians and their right to live on their ancestral land, in their own free country.
 
+## Release credits
+
+Musicians:
+* Trumpets: David Buchbinder , Romain Beauxis
+* Saxophone: Cory Diane , Lexxxi Pink
+* Cornet: Amanda Blackshaw , Azad Safavi
+* Trombone: Glennon Davalos Stanton, Riley Goodemote, Susan Sakash
+* Mid-horn: Shaye Cohn
+* Accordion: Simon Moushabeck
+* Derboukas: Marco Saah, Jennifer Whitney
+* Percussions: Saiya
+* Snare: Carl Patrick
+* Bass drum: Godzilla McGillicuddy
+* Sousaphone: Adam Lessnau
+* Guitar: Ahmed Hosam Refai
+* Vocals: Anisah Sahibul
+
+Cover photo: A. Hennen Payne
+
+Written by: Mohammad Assaf
+
+Arrangement: Simon Moushabeck
+
+Recorded at the Material Institute on May, 2025
+* Recording engineer: Kevin Millen
+* Mixing engineer: Adam Keil
+* Master: Kevin Nix
+* Production: Romain Beauxis & Hanoun Brass Band
+
 ## Single release
 * September, 5
 * Digital platforms: Bandcamp, Spotify, Apple Music, etc..
