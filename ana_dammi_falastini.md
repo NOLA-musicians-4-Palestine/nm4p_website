@@ -37,9 +37,9 @@ Yallah!
 ## Release credits
 
 Musicians:
-* Trumpets: David Buchbinder , Romain Beauxis
-* Saxophone: Cory Diane , Lexxxi Pink
-* Cornet: Amanda Blackshaw , Azad Safavi
+* Trumpets: David Buchbinder, Romain Beauxis
+* Saxophone: Cory Diane, Lexxxi Pink
+* Cornet: Amanda Blackshaw, Azad Safavi
 * Trombone: Glennon Davalos Stanton, Riley Goodemote, Susan Sakash
 * Mid-horn: Shaye Cohn
 * Accordion: Simon Moushabeck
