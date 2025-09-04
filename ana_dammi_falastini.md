@@ -26,7 +26,7 @@ On Twelfth Night, 2024, a multicultural New Orleans brass band commandeered the 
 
 This September 5, Hanoun Brass Band will be releasing their first single, an arrangement of Ana Dammi Falastini  (My blood Is Palestinian). The song, written by Arab Idol winner Mohammed Assaf, is a true expression of Palestinian identity. Played at protests and weddings, often accompanied by the traditional dabke dance, the song feels like a modern Palestinian national anthem.
 
-Recorded at the Material Institute and arranged by Simon Moushabeck, this release reminds us that Palestinians are still denied agency, dignity and self-determination. In a world where musical instruments are banned from entering Gaza for "security reasons" and music teachers are using the sound of military drones to teach the next generation of musicians, Hanoun Brass Band and New Orleans Musicians for Palestine stand in support of Palestinians and their right to live on their ancestral land, in their own free country.
+Recorded at the Material Institute and arranged by Simon Moushabeck, this release reminds us that Palestinians are still denied agency, dignity and self-determination. In a world where musical instruments are banned from entering Gaza for "security reasons" and music teachers have to sing along with the overhelming sound of military drones to teach the next generation of musicians, Hanoun Brass Band and New Orleans Musicians for Palestine stand in support of Palestinians and their right to live on their ancestral land, in their own free country.
 
 ## Release credits
 
@@ -70,3 +70,4 @@ Recorded at the Material Institute on May, 2025
 
 - [Ana Dammi Falastini: A National(izing) Anthem](https://www.arabamerica.com/ana-dammi-falastini-a-nationalizing-anthem/)
 - [A song of existence: Mohammed Assaf’s “Dammi Falastini” and rebellion against colonization](https://berkeleybside.com/a-song-of-existence-mohammed-assafs-dammi-falastini-and-rebellion-against-colonization/)
+- [A music teacher uses Gaza’s relentless soundtrack of war to resist Israel](https://www.aljazeera.com/news/2025/8/30/a-music-teacher-uses-gazas-relentless-soundtrack-of-war-to-resist-israel)
