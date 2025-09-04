@@ -28,7 +28,7 @@ This September 5, Hanoun Brass Band will be releasing their first single, an arr
 
 Recorded at the Material Institute and arranged by Simon Moushabeck, this release reminds us that Palestinians are still denied agency, dignity and self-determination.
 
-They live in a world where musical instruments are banned from entering Gaza for "security reasons" and music teachers have students sing along with the overhelming sound of military drones, to make it into something beautiful. [Or, more tolerable.]
+They live in a world where musical instruments are banned from entering Gaza for "security reasons" and music teachers have students sing along with the overhelming sound of military drones, to make it into something beautiful (or, at least, more tolerable.)
 
 With this release, Hanoun Brass Band and New Orleans Musicians for Palestine stand in support of Palestinians and their right to live on their ancestral land, in their own free country.
 
