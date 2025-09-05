@@ -24,7 +24,7 @@ layout: ana_dammi_falastini
 
 On Twelfth Night, 2024, a multicultural New Orleans brass band commandeered the first parade of Carnival, launching the New Orleans Musicians for Palestine (NM4P) collective to bring attention to the Israeli state's attacks on Gaza. Since then, the collective expanded, and now includes the Hanoun Brass Band; a Carnival krewe called Krewe of Zeitoun; and a musicians’ solidarity network. Together, they led a joyful “right of return” parade last Lundi Gras, bringing Palestinian and Arabic music, culture, and a spirit of resistance to Mardi Gras.
 
-This September 5, Hanoun Brass Band will be releasing their first single, an arrangement of Ana Dammi Falastini (My blood Is Palestinian). The song, written by Arab Idol winner Mohammed Assaf, is a true expression of Palestinian identity. Played at protests and weddings, often accompanied by the traditional dabke dance, the song feels like a modern Palestinian national anthem. Proceed from the release will be donated to Palestinian rights organizations.
+This September 5, Hanoun Brass Band will be releasing their first single, an arrangement of Ana Dammi Falastini (My blood Is Palestinian). The song, written by Arab Idol winner Mohammed Assaf, is a true expression of Palestinian identity. Played at protests and weddings, often accompanied by the traditional dabke dance, the song feels like a modern Palestinian national anthem. All proceeds from the release will be donated to organizations supporting Palestinian rights.
 
 Recorded at the Material Institute and arranged by Simon Moushabeck, this release reminds us that Palestinians are still denied agency, dignity and self-determination.
 
