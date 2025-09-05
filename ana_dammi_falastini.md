@@ -40,7 +40,7 @@ Yallah!
 
 Musicians:
 
-- Trumpets: David B., Romain Beauxis
+- Trumpets: Abulaila Schwartz, Romain Beauxis
 - Saxophones: Cory Diane, Lexxxi Pink
 - Cornets: Amanda Blackshaw, Azad Safavi
 - Trombones: Glennon Davalos Stanton, Riley Goodemote, Susan Sakash
