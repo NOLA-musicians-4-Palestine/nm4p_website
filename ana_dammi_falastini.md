@@ -70,7 +70,7 @@ Recorded at the Material Institute on May, 2025
 ## Single release
 
 - September, 5
-- Digital platforms: Bandcamp, Spotify, Apple Music, etc..
+- Digital platforms: [Bandcamp](https://hanounbrassband.bandcamp.com/album/ana-dammi-falastini), [Spotify](https://open.spotify.com/album/0hTnahDD2SjtmGnk1iTElk?si=jPbuHMypR9yktOuuB7v75w), [YouTube](https://www.youtube.com/watch?v=8poseVjTubg), etc..
 
 ## Release show
 
