@@ -11,7 +11,23 @@ arranger: Simon Moushabeck
 ---
 
 ## Context
-Mohammed Assef sang this on Arab Idol (TODO: get better context)
+Mohammed Assef sang this on Arab Idol
+
+### Chorus Lyrics
+
+Ala Ahdi, Ala Deeni
+Ala Ardhi Tilaqini
+Ana Nahli Anaf Dihom
+Ana Dammi Falastini, Falastini, Falastini
+Ana Dammi Falasti..ni..
+
+On my promise, on my faith
+On my land you will find me
+I am for my people to save them.
+My blood is Palestinian, Palestinian, Palestinian
+my blood is Palestinian.
+
+
 
 ## Form/Arrangement Notes
 
