@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
   # on a schedule
   schedule:
-    # Runs every hour
-    - cron: '0 * * * *'
+    # Runs once a day at midnight
+    - cron: '0 0 * * *'
   # on pushes to the 'live' branch
   push:
     branches:
