@@ -4,7 +4,7 @@ layout: band
 
 ## Upcoming Events:
 
-(this will be updated soon...)
+{% include hanoun-events.md %}
 
 ## Rep List
 ### Current Rep
