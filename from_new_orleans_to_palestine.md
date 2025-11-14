@@ -54,10 +54,6 @@ Musicians:
 
 Cover art: Godzilla McGillicuddy
 
-Written by: Mohammad Assaf
-
-Arrangement: Simon Moushabeck
-
 Recorded at the Material Institute on May, 2025
 
 - Recording engineer: Kevin Millen
