@@ -6,3 +6,4 @@ tools/credentials.json
 tools/token.json
 tools/service-account-file.json
 *.swp
+.DS_Store
