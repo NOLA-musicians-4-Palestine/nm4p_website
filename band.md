@@ -2,11 +2,7 @@
 layout: band
 ---
 
-{% include quick_links.html %}
-
-## Upcoming Events:
-
-{% include hanoun-events.md %}
+## [We Released An Album!]({{"from_new_orleans_to_palestine.html" | relative_url}})
 
 ## Rep List
 ### Current Rep
