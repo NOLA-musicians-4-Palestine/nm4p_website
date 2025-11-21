@@ -1,10 +1,8 @@
 ---
 layout: band
 ---
-<h2>
-    Want us to play at an event? Fill out
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEZuyxhZAG2gfDAK0pyeh1jTGqRGyUqhmNtO_spFiCFWX1JA/viewform?usp=header" target="_blank">this form!</a>
-</h2>
+
+{% include quick_links.html %}
 
 ## Upcoming Events:
 

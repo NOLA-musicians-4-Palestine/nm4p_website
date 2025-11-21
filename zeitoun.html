@@ -2,6 +2,9 @@
 layout: zeitoun
 ---
 
+{% include quick_links.html %}
+
+
 <div class="olive-pattern-bg">
 	<h2>What is Krewe of Zeitoun</h2>
 </div>
@@ -15,8 +18,12 @@ layout: zeitoun
 		Zeitoun means "olive" in Arabic, an image that celebrates the interdependent relationship with the people and land of Palestine who have shaped and supported each other since time immemorial.
 	</p>
 
+	{% assign signup_link = site.data.quick_links | where: "name", "Krewe of Zeitoun Signup Form" | first %}
+	{% assign link = signup_link.link %}
+
 	<p>
 		The Krewe of Zeitoun is a membership-based project.
+		<a href="{{link}}">Anyone can sign up by clicking here</a>.
 		<a href="https://forms.gle/Y1tC21w4BpvBovyT9">Anyone can sign up by clicking here</a>.
 		<img class="float left"src="assets/images/zeitoun_photos/return-rebuild-remain.jpeg" alt="return-rebuild-remain">
 		Membership dues are $5/month or $60 a year.
@@ -24,7 +31,3 @@ layout: zeitoun
 		We also welcome existing organizations and collective projects to join the Krewe and collaborate on our projects and events.
 	</p>
 </div>
-
-<h2>
-	<a href="https://forms.gle/Y1tC21w4BpvBovyT9" target="_blank">Get Involved!</a>
-</h2>

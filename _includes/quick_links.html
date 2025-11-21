@@ -1,0 +1,10 @@
+<div class="quick-links">
+	<h2>Quick Links</h2>
+	<ul>
+	{% for item in site.data.quick_links %}
+		<li>
+			<a href="{{ item.link }}">{{ item.name }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
