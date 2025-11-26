@@ -5,7 +5,7 @@ charts_folder: assets/charts/el_derecho_de_vivir_en_paz
 recordings_folder: assets/recordings/el_derecho_de_vivir_en_paz
 reference_recordings:
   - https://www.youtube.com/watch?v=XkXise2bHE0
-status: current
+status: learning
 arranger: Simon Moushabeck
 ---
 
