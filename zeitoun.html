@@ -18,13 +18,9 @@ layout: zeitoun
 		Zeitoun means "olive" in Arabic, an image that celebrates the interdependent relationship with the people and land of Palestine who have shaped and supported each other since time immemorial.
 	</p>
 
-	{% assign signup_link = site.data.quick_links | where: "name", "Krewe of Zeitoun Signup Form" | first %}
-	{% assign link = signup_link.link %}
-
 	<p>
 		The Krewe of Zeitoun is a membership-based project.
-		<a href="{{link}}">Anyone can sign up by clicking here</a>.
-		<a href="https://forms.gle/Y1tC21w4BpvBovyT9">Anyone can sign up by clicking here</a>.
+		<a href="{{ site.data.quick_links.krewe_of_zeitoun_signup_form.link }}">Anyone can sign up by clicking here</a>.
 		<img class="float left"src="assets/images/zeitoun_photos/return-rebuild-remain.jpeg" alt="return-rebuild-remain">
 		Membership dues are $5/month or $60 a year.
 		This money funds not only the NOLA Musicians for Palestine, but will also be used for direct aid to Palestine and Palestinian-led organizations.

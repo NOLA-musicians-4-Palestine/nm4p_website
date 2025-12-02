@@ -3,7 +3,7 @@
 	<ul>
 	{% for item in site.data.quick_links %}
 		<li>
-			<a href="{{ item.link }}">{{ item.name }}</a>
+			<a href="{{ item[1].link }}">{{ item[1].name }}</a>
 		</li>
 	{% endfor %}
 	</ul>
