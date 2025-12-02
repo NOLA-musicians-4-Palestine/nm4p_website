@@ -15,18 +15,20 @@ layout: education-action-resources
 - Find your local chapters of the groups in the sections below, such as PYM and JVP. Attend and support actions they plan. Find your anti-imperial focus and get involved in organizing!
 
 ## Organizations & people to know and follow:
-- 	Palestinian Youth Movement (PYM)
-- 	US Campaign for Palestinians Rights (USPCR)
-- 	Adalah Justice Project
-- 	Eye on Palestine: @eye.on.palestine on Instagram
-- 	Bisan Owda: @wizard_bisan1 on Instagram
-- 	Hind Khoudary: @hindkhoudary on Instagram
-- 	Motaz Azaiza: @motaz_azaiza on Instagram
-- 	Plestia Alaqad: @byplestia on Instagram
-- 	Jenan Matari: @jenanmatari on Instagram
-- 	Ahmed Eldin: @ahmedeldin on Instagram
-- 	Yaffa:  @yaffasutopia on Instagram
-- 	Jewish Voice for Peace (JVP)
+- Palestinian Youth Movement (PYM)
+- US Campaign for Palestinians Rights (USPCR)
+- Adalah Justice Project
+- Eye on Palestine: @eye.on.palestine on Instagram
+- Bisan Owda: @wizard_bisan1 on Instagram
+- Hind Khoudary: @hindkhoudary on Instagram
+- Motaz Azaiza: @motaz_azaiza on Instagram
+- Plestia Alaqad: @byplestia on Instagram
+- Jenan Matari: @jenanmatari on Instagram
+- Ahmed Eldin: @ahmedeldin on Instagram
+- Yaffa:  @yaffasutopia on Instagram
+- Jewish Voice for Peace (JVP)
+- [Adalah Justice Project](https://www.adalahjusticeproject.org/resources)
+
 
 ## Just a few sources of education, news, and analysis:
 - Institute for Middle East Understanding (IMEU): @theimeu on Instagram
