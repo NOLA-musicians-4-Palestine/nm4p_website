@@ -1,10 +1,39 @@
 <div class="quick-links">
-	<h2>Quick Links</h2>
-	<ul>
+	<input style="display: none" id="show-quick-links" type="checkbox" checked>
+
+	<label for="show-quick-links">
+		<h3>
+			Quick Links
+			<img class="dropdown-arrow" src="assets/images/red-triangle.png">
+		</h3>
+	</label>
+
+	<ul class="quick-links-items">
 	{% for item in site.data.quick_links %}
 		<li>
 			<a href="{{ item[1].link }}">{{ item[1].name }}</a>
 		</li>
 	{% endfor %}
 	</ul>
+
+	<style>
+		ul.quick-links-items {
+			height: auto;
+			overflow: hidden;
+		}
+
+		#show-quick-links:checked ~ ul.quick-links-items {
+			height: 0px;
+
+		}
+
+		.dropdown-arrow{
+			transform: rotate(180deg);
+		}
+
+		#show-quick-links:checked ~ label .dropdown-arrow {
+			transform: rotate(0deg);
+		}
+
+	</style>
 </div>

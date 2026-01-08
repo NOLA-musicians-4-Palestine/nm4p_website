@@ -6,13 +6,17 @@ solidarity_network_signup_form:
   name: Solidarity Network Signup Form
   link: "https://forms.gle/y7WQPn8AiAS8csv7A"
 
-krewe_of_zeitoun_signup_form:
-  name: Krewe of Zeitoun Signup Form
+zeitoun_signup_form:
+  name: Krewe of Zeitoun Membership Form
   link: "https://forms.gle/Y1tC21w4BpvBovyT9"
 
-krewe_of_zeitoun_donation_link:
-  name: Krewe of Zeitoun Donation Link
-  link: "https://liberapay.com/NolaMusicians4Palestine/donate?amount=5&currency=USD&period=monthly"
+zeitoun_membership_dues_link:
+  name: Pay Krewe of Zeitoun Membership Dues
+  link: "https://buy.stripe.com/fZudR93U1bmPgQv0GeaMU00"
+
+nm4p_donation_link:
+  name: Donate to NM4P
+  link: "https://buy.stripe.com/8x2aEX2PX3Unas788GaMU01"
 
 hanoun_booking_form:
   name: Hanoun Booking Form
