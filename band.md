@@ -4,7 +4,10 @@ layout: band
 
 ## [We Released An Album!]({{"from_new_orleans_to_palestine.html" | relative_url}})
 
-## Rep List
+<div class="olive-pattern-bg">
+    <h2>Rep List</h2>
+</div>
+
 ### Current Rep
 
 {% for song in site.songs %}
@@ -31,8 +34,9 @@ If you want to make an arrangement that'd be cool.
 {% endif %}
 {% endfor %}
 
-## Resources
+<div class="olive-pattern-bg">
+    <h2>Resources</h2>
+</div>
 
-[Chants with Arabic Rhythms](chants_and_rhythms.html)
-
-[Maqam World](https://maqamworld.com/)
+- [Chants with Arabic Rhythms](chants_and_rhythms.html)
+- [Maqam World](https://maqamworld.com/)
