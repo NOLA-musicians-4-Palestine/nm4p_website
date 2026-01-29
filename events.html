@@ -48,24 +48,32 @@
 <div id="calendar" class="net-pattern-bg">
 {% for event in site.events %}
 	<div id="event-{{ forloop.index0 }}" class="event" data-date="{{ event.date | date: '%Y%m%d' }}">
-		<img class="flyer"src="assets/images/event_flyers/{{ event.flyer }}">
-		<div class="info">
+		{% if event.flyer %}
+			<img class="flyer"src="assets/images/event_flyers/{{ event.flyer }}">
+		{% else %}
+			<img class="flyer"src="assets/images/event_flyers/flag-blank-flyer.png">
+		{% endif %}
+
+		<div class="info {% unless event.flyer %} no-flyer {% endunless %}">
+
 			<div class="title">
-				<h3>What:</h3>
-				{{ event.title }}
+				<h2> {{ event.title }} </h2>
 			</div>
+
 			{% if event.location %}
-			<div class="location">
-				<h3>Where:</h3>
-				{{ event.location }}
-			</div>
+				<div class="location">
+					<h3>Where:</h3>
+					{{ event.location }}
+				</div>
 			{% endif %}
+
 			{% if event.date %}
-			<div class="date-and-time">
-				<h3>When:</h3>
-				{{ event.date | date: "%A, %b %d %Y"}} {{ event.time }}
-			</div>
+				<div class="date-and-time">
+					<h3>When:</h3>
+					{{ event.date | date: "%A, %b %d %Y"}} {{ event.time }}
+				</div>
 			{% endif %}
+
 			<div class="description">{{ event.content }}</div>
 		</div>
 	</div>

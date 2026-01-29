@@ -39,7 +39,19 @@
 			}
 		}
 
+		.info.no-flyer{
+			max-height: 100%;
+			opacity: 1;
+			pointer-events: auto;
+		}
+
 		.info.active {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.info.no-flyer.active{
+			max-height: 100%;
 			opacity: 1;
 			pointer-events: auto;
 		}
