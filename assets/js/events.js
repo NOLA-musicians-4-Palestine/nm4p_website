@@ -42,7 +42,7 @@ function hide_past_events(){
 	// delete past events
 	events.forEach((event) => {
 		let event_date = parseInt(event.dataset.date);
-		console.log(event_date, today);
+		//console.log(event_date, today);
 		if(today > event_date){
 			window.old_events.push(cal.removeChild(event));
 		}
