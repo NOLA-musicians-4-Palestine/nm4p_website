@@ -40,3 +40,10 @@ If you want to make an arrangement that'd be cool.
 
 - [Chants with Arabic Rhythms](chants_and_rhythms.html)
 - [Maqam World](https://maqamworld.com/)
+
+
+<div class="olive-pattern-bg">
+    <h2>Upcoming Band Events</h2>
+</div>
+
+{% include band_events.html %}
