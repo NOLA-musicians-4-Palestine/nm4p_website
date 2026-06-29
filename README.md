@@ -2,6 +2,22 @@
 layout: readme
 ---
 
+# Current Task
+
+We're un-naming the solidarity network. that means a few things
+
+- calling everyone who signed up simply "members" or "signatories" and listing them on the website
+- re-issuing all QR code sheets
+- listing members on the website <- Doing this now
+
+- [x] change "solidarity network" in nav to "calendar"
+- [x] move the content of solidarity network page (except calendar) to home under the heading "solidarity statement"
+- [x] list members (for now static, but make it dynamic later)
+- [x] change words "solidarity network" from other links and navs
+- [x] change words "solidarity network" from forms and signup sheets 
+
+
+
 # Development Notes
 
 ## setup environment
@@ -46,7 +62,7 @@ To deploy this site from the `live` branch using the [included action](.github/w
 - [ ] handle old events better
 - [ ] download events in batches of 10 dynamically
     - the pages are pre-rendered by jekyll, just not served
-- [ ] make something to show for when there are no upcoming events
+- [x] make something to show for when there are no upcoming events
 - [ ] automate followup email
 - [ ] regular blog where orgs can post updates
 - [ ] content pulled from google docs
@@ -56,3 +72,4 @@ To deploy this site from the `live` branch using the [included action](.github/w
 - [ ] chant list
 - [ ] make sure everything that needs to be environment variables are that way
     - [ ] document how to clone the repository and make your own
+- [ ] pull events from multiple sources

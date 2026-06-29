@@ -1,9 +1,9 @@
-solidarity_network_event_submission_form:
-  name: Solidarity Network Event Submission Form
+calendar_event_submission_form:
+  name: Calendar Event Submission Form
   link: "https://forms.gle/T9pz7BpdDSTSkxxV8"
 
-solidarity_network_signup_form:
-  name: Solidarity Network Signup Form
+solidarity_statement_form:
+  name: Solidarity Statement Form
   link: "https://forms.gle/y7WQPn8AiAS8csv7A"
 
 zeitoun_signup_form:

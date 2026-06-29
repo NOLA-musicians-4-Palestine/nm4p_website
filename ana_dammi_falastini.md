@@ -22,7 +22,7 @@ layout: ana_dammi_falastini
   </div>
 </div>
 
-On Twelfth Night, 2024, a multicultural New Orleans brass band commandeered the first parade of Carnival, launching the New Orleans Musicians for Palestine (NM4P) collective to bring attention to the Israeli state's attacks on Gaza. Since then, the collective expanded, and now includes the Hanoun Brass Band; a Carnival krewe called Krewe of Zeitoun; and a musicians’ solidarity network. Together, they led a joyful “right of return” parade last Lundi Gras, bringing Palestinian and Arabic music, culture, and a spirit of resistance to Mardi Gras.
+On Twelfth Night, 2024, a multicultural New Orleans brass band commandeered the first parade of Carnival, launching the New Orleans Musicians for Palestine (NM4P) collective to bring attention to the Israeli state's attacks on Gaza. Since then, the collective expanded, and now includes the Hanoun Brass Band; a Carnival krewe called Krewe of Zeitoun; and a network of individual bands and musicians in solidarity. Together, they led a joyful “right of return” parade last Lundi Gras, bringing Palestinian and Arabic music, culture, and a spirit of resistance to Mardi Gras.
 
 This September 5, Hanoun Brass Band will be releasing their first single, an arrangement of Ana Dammi Falastini (My blood Is Palestinian). All proceeds from the release will be donated to organizations supporting Palestinian rights.
 
