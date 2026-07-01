@@ -28,6 +28,19 @@
 
 	<p><a href="{{site.data.quick_links.solidarity_statement_form.link}}" target="_blank">Click here to add your name!</a></p>
 
+	<script>
+		// TODO this is unfinished
+		window.setInterval(scrollSigs, 10);
+
+		function scrollSigs(){
+			let sigs_container = document.querySelector("#signatories");
+			sigs_container.scrollLeft += 1;
+		}
+
+		// on hover or mouse click or touch don't run the function for maybe 5 seconds before resuming
+	</script>
+
+
 
 	<div class="olive-pattern-bg">
 		<h2>Who Are We?</h2>
