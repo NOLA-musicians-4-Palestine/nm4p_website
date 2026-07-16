@@ -29,15 +29,23 @@
 	<p><a href="{{site.data.quick_links.solidarity_statement_form.link}}" target="_blank">Click here to add your name!</a></p>
 
 	<script>
-		// TODO this is unfinished
-		window.setInterval(scrollSigs, 10);
+		sig_scroll_interval = window.setInterval(scrollSigs, 4000);
 
 		function scrollSigs(){
 			let sigs_container = document.querySelector("#signatories");
-			sigs_container.scrollLeft += 1;
-		}
 
-		// on hover or mouse click or touch don't run the function for maybe 5 seconds before resuming
+			let scroll_increment = sigs_container.clientWidth/2;
+			var maxScrollLeft = sigs_container.scrollWidth - sigs_container.clientWidth;
+
+			sigs_container.scrollTo({
+				left: Math.min(sigs_container.scrollLeft + scroll_increment, maxScrollLeft),
+				behavior: "smooth"
+			});
+
+			if(sigs_container.scrollLeft > maxScrollLeft - 50 ){
+				sigs_container.scrollTo({left: 0, behavior: "smooth"});;
+			}
+		}
 	</script>
 
 
