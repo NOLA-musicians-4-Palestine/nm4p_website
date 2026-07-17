@@ -1,0 +1,50 @@
+# Instrument -> chart key.
+#   token   : the <transposition>[-bass] key of the part chart to pick
+#             (concert | Bb | Eb | F | concert-bass | Bb-bass | Eb-bass), or null
+#   aliases : tokens of per-instrument charts (e.g. Tarweedeh) this player reads
+# Edit freely: this drives the "Pick your instrument" dropdown.
+- name: Flute
+  token: concert
+  aliases: [flute]
+- name: Oboe
+  token: concert
+  aliases: [flute]
+- name: Violin
+  token: concert
+  aliases: [flute]
+- name: Clarinet
+  token: Bb
+  aliases: [trumpet]
+- name: Soprano Sax
+  token: Bb
+  aliases: [trumpet]
+- name: Trumpet
+  label: Trumpet / Cornet
+  token: Bb
+  aliases: [trumpet]
+- name: Tenor Sax
+  token: Bb
+  aliases: [tenor]
+- name: Alto Sax
+  token: Eb
+  aliases: [alto]
+- name: Baritone Sax
+  token: Eb
+  aliases: [alto]
+- name: French Horn
+  token: F
+  aliases: []
+- name: Trombone
+  token: concert-bass
+  aliases: [tuba]
+- name: Euphonium
+  label: Euphonium / Baritone
+  token: concert-bass
+  aliases: [tuba]
+- name: Tuba
+  label: Tuba / Sousaphone
+  token: concert-bass
+  aliases: [tuba]
+- name: Percussion
+  token: null
+  aliases: [percussion]

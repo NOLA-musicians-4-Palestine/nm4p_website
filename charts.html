@@ -1,0 +1,146 @@
+---
+layout: default
+title: Chart Book Builder
+---
+
+<div class="centered-section">
+	<h1>Build your chart book</h1>
+	<p>Pick your instrument (or your key), optionally narrow to a part, and download a zip
+	of every chart at your transposition &mdash; organized by song and by part.</p>
+
+	<p>
+		<label for="instrument"><strong>Your instrument</strong></label><br>
+		<select id="instrument"></select>
+	</p>
+
+	<fieldset>
+		<legend><strong>Parts</strong> (optional &mdash; all by default)</legend>
+		<label><input type="checkbox" class="part" value="high" checked> High</label>
+		<label><input type="checkbox" class="part" value="mid" checked> Mid</label>
+		<label><input type="checkbox" class="part" value="low" checked> Low</label>
+	</fieldset>
+
+	<p><button id="build" type="button">Get parts</button></p>
+	<p id="status"></p>
+</div>
+
+<script src="{{ '/assets/js/jszip.min.js' | relative_url }}"></script>
+<script>
+// Named instruments from _data/instruments.yml, plus generic key fallbacks.
+const INSTRUMENTS = [
+{%- for i in site.data.instruments %}
+	{name: {{ i.name | jsonify }}, label: {{ i.label | default: i.name | jsonify }}, token: {{ i.token | jsonify }}, aliases: {{ i.aliases | jsonify }}},
+{%- endfor %}
+	{group: "Instrument not listed — pick your key"},
+	{name: "Concert pitch, treble clef (C)", token: "concert", aliases: ["flute"]},
+	{name: "Concert pitch, bass clef", token: "concert-bass", aliases: ["tuba"]},
+	{name: "B♭ (treble)", token: "Bb", aliases: ["trumpet"]},
+	{name: "E♭ (treble)", token: "Eb", aliases: ["alto"]},
+	{name: "F (treble)", token: "F", aliases: []},
+	{name: "B♭ (bass clef)", token: "Bb-bass", aliases: []},
+	{name: "E♭ (bass clef)", token: "Eb-bass", aliases: []},
+];
+
+const sel = document.getElementById("instrument");
+INSTRUMENTS.forEach((it, idx) => {
+	if (it.group) {
+		const og = document.createElement("optgroup");
+		og.label = it.group;
+		sel.appendChild(og);
+		it._og = og;
+		return;
+	}
+	const opt = document.createElement("option");
+	opt.value = idx;
+	opt.textContent = it.label || it.name;
+	// append into the most recent optgroup if any, else the select
+	const lastGroup = INSTRUMENTS.slice(0, idx).reverse().find(x => x.group);
+	(lastGroup ? lastGroup._og : sel).appendChild(opt);
+});
+
+const PART_RE = /^(high|mid1|mid2|mid|low|both_mids)-(concert|Bb|Eb|F)(-bass)?$/;
+
+function parseFile(path) {
+	const parts = path.split("/");
+	const slug = parts[parts.indexOf("charts") + 1];
+	const base = parts.pop().replace(/\.pdf$/i, "");
+	const rest = base.slice(slug.length + 1); // strip "<slug>-"
+	if (rest === "score") return {slug, kind: "score"};
+	if (rest === "percussion") return {slug, kind: "inst", inst: "percussion", part: "percussion"};
+	const m = rest.match(PART_RE);
+	if (m) return {slug, kind: "part", part: m[1], token: m[2] + (m[3] || "")};
+	return {slug, kind: "inst", inst: rest, part: rest};
+}
+
+function partGroup(p) {
+	if (p.startsWith("high")) return "high";
+	if (p.startsWith("low")) return "low";
+	return "mid";
+}
+
+function sanitize(s) { return s.replace(/[\/\\]/g, " - "); }
+
+async function build() {
+	const status = document.getElementById("status");
+	const it = INSTRUMENTS[+sel.value];
+	const wantParts = [...document.querySelectorAll(".part:checked")].map(c => c.value);
+	const allParts = wantParts.length === 3;
+
+	status.textContent = "Loading chart list…";
+	const manifest = await fetch("{{ '/charts.json' | relative_url }}").then(r => r.json());
+
+	// group files by song slug
+	const bySong = {};
+	manifest.files.forEach(path => {
+		const f = parseFile(path);
+		if (f.kind === "score") return;
+		(bySong[f.slug] = bySong[f.slug] || []).push({...f, path});
+	});
+
+	const picks = [];   // {path, title, part}
+	const missing = [];
+	for (const slug in bySong) {
+		const title = manifest.titles[slug] || slug;
+		const chosen = bySong[slug].filter(f => {
+			if (f.kind === "inst") return it.aliases.includes(f.inst);
+			return f.token === it.token && (allParts || wantParts.includes(partGroup(f.part)));
+		});
+		if (chosen.length === 0) missing.push(title);
+		chosen.forEach(f => picks.push({path: f.path, title, part: f.part, isInst: f.kind === "inst"}));
+	}
+
+	if (picks.length === 0) {
+		status.textContent = "No charts match that selection.";
+		return;
+	}
+
+	const zip = new JSZip();
+	const root = sanitize(`Hanoun Brass Band - ${it.name} Charts`);
+	const blobs = {};
+	let done = 0;
+	for (const p of picks) {
+		status.textContent = `Fetching charts… ${++done}/${picks.length}`;
+		if (!blobs[p.path]) blobs[p.path] = await fetch(p.path).then(r => r.blob());
+		const song = sanitize(p.title);
+		const fname = sanitize(p.isInst
+			? `${p.title} - ${it.name}`
+			: `${p.title} - ${it.name} - ${p.part}`) + ".pdf";
+		zip.file(`${root}/per-song/${song}/${fname}`, blobs[p.path]);
+		zip.file(`${root}/per-part/${p.part}/${fname}`, blobs[p.path]);
+	}
+
+	status.textContent = "Building zip…";
+	const blob = await zip.generateAsync({type: "blob"});
+	const a = document.createElement("a");
+	a.href = URL.createObjectURL(blob);
+	a.download = root + ".zip";
+	a.click();
+	URL.revokeObjectURL(a.href);
+	status.textContent = `Done: ${picks.length} charts.` +
+		(missing.length ? ` No chart for your key in: ${missing.join(", ")}.` : "");
+}
+
+document.getElementById("build").addEventListener("click", () => {
+	build().catch(e => { document.getElementById("status").textContent = "Error: " + e.message; });
+});
+</script>
