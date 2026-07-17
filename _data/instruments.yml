@@ -41,8 +41,8 @@
   label: Euphonium / Baritone
   token: concert-bass
   aliases: [tuba]
-- name: Tuba
-  label: Tuba / Sousaphone
+- name: Bass
+  label: Tuba / Sousaphone / Bass
   token: concert-bass
   aliases: [tuba]
 - name: Percussion
