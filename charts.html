@@ -20,6 +20,9 @@ title: Chart Book Builder
 		<label><input type="checkbox" class="part" value="low" checked> Low</label>
 	</fieldset>
 
+	<p><button id="build" type="button">Get parts</button></p>
+	<p id="status"></p>
+
 	<h2>About the parts</h2>
 	<p>Most arrangements are split into three parts: <strong>high</strong>, <strong>mid</strong>, and <strong>low</strong>.</p>
 	<p><strong>High</strong> and <strong>mid</strong> share the melody and counter-melody. Usually the high
@@ -31,9 +34,6 @@ title: Chart Book Builder
 	<p><strong>Low</strong> parts are the bass line.</p>
 	<p>Pick your part based on your instrument&rsquo;s range and whether you&rsquo;d rather live a bit more on
 	the melody side or the accompaniment side &mdash; knowing you&rsquo;ll do some of both.</p>
-
-	<p><button id="build" type="button">Get parts</button></p>
-	<p id="status"></p>
 </div>
 
 <script src="{{ '/assets/js/jszip.min.js' | relative_url }}"></script>
