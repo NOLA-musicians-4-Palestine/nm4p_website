@@ -45,6 +45,3 @@
   label: Tuba / Sousaphone / Bass
   token: concert-bass
   aliases: [tuba]
-- name: Percussion
-  token: null
-  aliases: [percussion]
