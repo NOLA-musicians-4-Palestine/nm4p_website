@@ -90,8 +90,6 @@ function partGroup(p) {
 	return "mid";
 }
 
-function sanitize(s) { return s.replace(/[\/\\]/g, " - "); }
-
 // Loaded once at page load.
 let MANIFEST = null;   // {titles, files}
 let BY_SONG = {};      // slug -> [parsed files]
@@ -157,9 +155,9 @@ async function build() {
 	const out = await merged.save();
 	const a = document.createElement("a");
 	a.href = URL.createObjectURL(new Blob([out], {type: "application/pdf"}));
-	a.download = sanitize(`Hanoun Brass Band - ${it.name} - ${want}`) + ".pdf";
+	a.target = "_blank";
+	a.rel = "noopener";
 	a.click();
-	URL.revokeObjectURL(a.href);
 	status.textContent = `Done: ${picks.length} charts.` +
 		(missing.length ? ` No ${want} chart for your key in: ${missing.join(", ")}.` : "");
 }
