@@ -14,10 +14,12 @@ title: Chart Book Builder
 	</p>
 
 	<fieldset>
-		<legend><strong>Parts</strong> (optional &mdash; all by default)</legend>
-		<label><input type="checkbox" class="part" value="high" checked> High</label>
-		<label><input type="checkbox" class="part" value="mid" checked> Mid</label>
-		<label><input type="checkbox" class="part" value="low" checked> Low</label>
+		<legend><strong>Parts</strong></legend>
+		<p><small>Picking an instrument checks its <em>suggested</em> parts &mdash; you can always
+		change them.</small></p>
+		<label><input type="checkbox" class="part" value="high"> High</label>
+		<label><input type="checkbox" class="part" value="mid"> Mid</label>
+		<label><input type="checkbox" class="part" value="low"> Low</label>
 	</fieldset>
 
 	<p><button id="build" type="button">Get parts</button></p>
@@ -41,7 +43,7 @@ title: Chart Book Builder
 // Named instruments from _data/instruments.yml, plus generic key fallbacks.
 const INSTRUMENTS = [
 {%- for i in site.data.instruments %}
-	{name: {{ i.name | jsonify }}, label: {{ i.label | default: i.name | jsonify }}, token: {{ i.token | jsonify }}, aliases: {{ i.aliases | jsonify }}},
+	{name: {{ i.name | jsonify }}, label: {{ i.label | default: i.name | jsonify }}, token: {{ i.token | jsonify }}, aliases: {{ i.aliases | jsonify }}, suggested: {{ i.suggested_parts | jsonify }}},
 {%- endfor %}
 	{group: "Instrument not listed — pick your key"},
 	{name: "Concert pitch, treble clef (C)", token: "concert", aliases: ["flute"]},
@@ -92,6 +94,16 @@ function partGroup(p) {
 
 function sanitize(s) { return s.replace(/[\/\\]/g, " - "); }
 
+const partBoxes = [...document.querySelectorAll(".part")];
+
+// Check the parts suggested for the selected instrument (generic keys: check all).
+function suggestParts() {
+	const it = INSTRUMENTS[+sel.value];
+	partBoxes.forEach(box => {
+		box.checked = it.suggested ? it.suggested.includes(box.value) : true;
+	});
+}
+
 async function build() {
 	const status = document.getElementById("status");
 	const it = INSTRUMENTS[+sel.value];
@@ -126,19 +138,26 @@ async function build() {
 		return;
 	}
 
+	// Only one part in the whole book? Drop the per-part subfolder and the "- <part>" tag.
+	const flat = new Set(picks.filter(p => !p.isInst).map(p => p.part)).size <= 1;
+
 	const zip = new JSZip();
-	const root = sanitize(`Hanoun Brass Band - ${it.name} Charts`);
+	const partsLabel = wantParts.length ? ` (${wantParts.join(", ")})` : "";
+	const root = sanitize(`Hanoun Brass Band - ${it.name}${partsLabel} Charts`);
 	const blobs = {};
 	let done = 0;
 	for (const p of picks) {
 		status.textContent = `Fetching charts… ${++done}/${picks.length}`;
 		if (!blobs[p.path]) blobs[p.path] = await fetch(p.path).then(r => r.blob());
 		const song = sanitize(p.title);
-		const fname = sanitize(p.isInst
-			? `${p.title} - ${it.name}`
-			: `${p.title} - ${it.name} - ${p.part}`) + ".pdf";
-		zip.file(`${root}/per-song/${song}/${fname}`, blobs[p.path]);
-		zip.file(`${root}/per-part/${p.part}/${fname}`, blobs[p.path]);
+		const fname = sanitize(`${p.title} - ${it.name}` + (p.isInst ? "" : ` - ${p.part}`)) + ".pdf";
+		if (flat) {
+			// One part: a single flat folder (per-song and per-part would be identical).
+			zip.file(`${root}/${fname}`, blobs[p.path]);
+		} else {
+			zip.file(`${root}/per-song/${song}/${fname}`, blobs[p.path]);
+			zip.file(`${root}/per-part/${p.part}/${fname}`, blobs[p.path]);
+		}
 	}
 
 	status.textContent = "Building zip…";
@@ -152,6 +171,8 @@ async function build() {
 		(missing.length ? ` No chart for your key in: ${missing.join(", ")}.` : "");
 }
 
+sel.addEventListener("change", suggestParts);
+suggestParts();
 document.getElementById("build").addEventListener("click", () => {
 	build().catch(e => { document.getElementById("status").textContent = "Error: " + e.message; });
 });
