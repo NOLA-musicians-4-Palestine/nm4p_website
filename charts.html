@@ -5,24 +5,23 @@ title: Chart Book Builder
 
 <div class="centered-section">
 	<h1>Build your chart book</h1>
-	<p>Pick your instrument (or your key), optionally narrow to a part, and download a zip
-	of every chart at your transposition &mdash; organized by song and by part.</p>
+	<p>Pick your part and your instrument, then download a single PDF with that part
+	for every song at your transposition.</p>
 
 	<p>
-		<label for="instrument"><strong>Your instrument</strong></label><br>
+		<label for="instrument"><strong>1. Pick your instrument</strong></label><br>
 		<select id="instrument"></select>
 	</p>
 
 	<fieldset>
-		<legend><strong>Parts</strong></legend>
-		<p><small>Picking an instrument checks its <em>suggested</em> parts &mdash; you can always
-		change them.</small></p>
-		<label><input type="checkbox" class="part" value="high"> High</label>
-		<label><input type="checkbox" class="part" value="mid"> Mid</label>
-		<label><input type="checkbox" class="part" value="low"> Low</label>
+		<legend><strong>2. Pick your part</strong></legend>
+		<p><small>Your instrument&rsquo;s usual part is pre-selected &mdash; change it if you like.</small></p>
+		<label><input type="radio" name="part" value="high"> High <em>(melody)</em></label><br>
+		<label><input type="radio" name="part" value="mid"> Mid <em>(accompaniment)</em></label><br>
+		<label><input type="radio" name="part" value="low"> Low <em>(bass)</em></label>
 	</fieldset>
 
-	<p><button id="build" type="button">Get parts</button></p>
+	<p><button id="build" type="button">Get my charts</button></p>
 	<p id="status"></p>
 
 	<h2>About the parts</h2>
@@ -38,12 +37,12 @@ title: Chart Book Builder
 	the melody side or the accompaniment side &mdash; knowing you&rsquo;ll do some of both.</p>
 </div>
 
-<script src="{{ '/assets/js/jszip.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/pdf-lib.min.js' | relative_url }}"></script>
 <script>
 // Named instruments from _data/instruments.yml, plus generic key fallbacks.
 const INSTRUMENTS = [
 {%- for i in site.data.instruments %}
-	{name: {{ i.name | jsonify }}, label: {{ i.label | default: i.name | jsonify }}, token: {{ i.token | jsonify }}, aliases: {{ i.aliases | jsonify }}, suggested: {{ i.suggested_parts | jsonify }}},
+	{name: {{ i.name | jsonify }}, label: {{ i.label | default: i.name | jsonify }}, token: {{ i.token | jsonify }}, aliases: {{ i.aliases | jsonify }}, rec: {{ i.recommended_part | jsonify }}},
 {%- endfor %}
 	{group: "Instrument not listed — pick your key"},
 	{name: "Concert pitch, treble clef (C)", token: "concert", aliases: ["flute"]},
@@ -67,7 +66,6 @@ INSTRUMENTS.forEach((it, idx) => {
 	const opt = document.createElement("option");
 	opt.value = idx;
 	opt.textContent = it.label || it.name;
-	// append into the most recent optgroup if any, else the select
 	const lastGroup = INSTRUMENTS.slice(0, idx).reverse().find(x => x.group);
 	(lastGroup ? lastGroup._og : sel).appendChild(opt);
 });
@@ -94,43 +92,49 @@ function partGroup(p) {
 
 function sanitize(s) { return s.replace(/[\/\\]/g, " - "); }
 
-const partBoxes = [...document.querySelectorAll(".part")];
+// Loaded once at page load.
+let MANIFEST = null;   // {titles, files}
+let BY_SONG = {};      // slug -> [parsed files]
+const partRadios = [...document.querySelectorAll('input[name="part"]')];
 
-// Check the parts suggested for the selected instrument (generic keys: check all).
-function suggestParts() {
-	const it = INSTRUMENTS[+sel.value];
-	partBoxes.forEach(box => {
-		box.checked = it.suggested ? it.suggested.includes(box.value) : true;
+async function loadManifest() {
+	MANIFEST = await fetch("{{ '/charts.json' | relative_url }}").then(r => r.json());
+	MANIFEST.files.forEach(path => {
+		const f = parseFile(path);
+		if (f.kind === "score") return;
+		(BY_SONG[f.slug] = BY_SONG[f.slug] || []).push({...f, path});
 	});
+	updateParts();
+}
+
+// Pre-select the instrument's recommended part.
+function updateParts() {
+	const it = INSTRUMENTS[+sel.value];
+	const rec = partRadios.find(r => r.value === it.rec);
+	(rec || partRadios[0]).checked = true;
 }
 
 async function build() {
 	const status = document.getElementById("status");
 	const it = INSTRUMENTS[+sel.value];
-	const wantParts = [...document.querySelectorAll(".part:checked")].map(c => c.value);
-	const allParts = wantParts.length === 3;
+	const want = document.querySelector('input[name="part"]:checked').value;
+	const manifest = MANIFEST, bySong = BY_SONG;
 
-	status.textContent = "Loading chart list…";
-	const manifest = await fetch("{{ '/charts.json' | relative_url }}").then(r => r.json());
-
-	// group files by song slug
-	const bySong = {};
-	manifest.files.forEach(path => {
-		const f = parseFile(path);
-		if (f.kind === "score") return;
-		(bySong[f.slug] = bySong[f.slug] || []).push({...f, path});
-	});
-
+	// For each song: the part charts at this key/part; if none, fall back to the
+	// per-instrument chart (e.g. Tarweedeh) this instrument reads.
 	const picks = [];   // {path, title, part}
 	const missing = [];
-	for (const slug in bySong) {
+	const slugs = Object.keys(bySong).sort((a, b) =>
+		(manifest.titles[a] || a).localeCompare(manifest.titles[b] || b));
+	for (const slug of slugs) {
 		const title = manifest.titles[slug] || slug;
-		const chosen = bySong[slug].filter(f => {
-			if (f.kind === "inst") return it.aliases.includes(f.inst);
-			return f.token === it.token && (allParts || wantParts.includes(partGroup(f.part)));
-		});
+		let chosen = bySong[slug]
+			.filter(f => f.kind === "part" && f.token === it.token && partGroup(f.part) === want)
+			.sort((a, b) => a.part.localeCompare(b.part));
+		if (chosen.length === 0)
+			chosen = bySong[slug].filter(f => f.kind === "inst" && it.aliases.includes(f.inst));
 		if (chosen.length === 0) missing.push(title);
-		chosen.forEach(f => picks.push({path: f.path, title, part: f.part, isInst: f.kind === "inst"}));
+		chosen.forEach(f => picks.push({path: f.path, title}));
 	}
 
 	if (picks.length === 0) {
@@ -138,42 +142,31 @@ async function build() {
 		return;
 	}
 
-	// Only one part in the whole book? Drop the per-part subfolder and the "- <part>" tag.
-	const flat = new Set(picks.filter(p => !p.isInst).map(p => p.part)).size <= 1;
-
-	const zip = new JSZip();
-	const partsLabel = wantParts.length ? ` (${wantParts.join(", ")})` : "";
-	const root = sanitize(`Hanoun Brass Band - ${it.name}${partsLabel} Charts`);
-	const blobs = {};
+	// Merge every chart into one PDF.
+	const merged = await PDFLib.PDFDocument.create();
 	let done = 0;
 	for (const p of picks) {
 		status.textContent = `Fetching charts… ${++done}/${picks.length}`;
-		if (!blobs[p.path]) blobs[p.path] = await fetch(p.path).then(r => r.blob());
-		const song = sanitize(p.title);
-		const fname = sanitize(`${p.title} - ${it.name}` + (p.isInst ? "" : ` - ${p.part}`)) + ".pdf";
-		if (flat) {
-			// One part: a single flat folder (per-song and per-part would be identical).
-			zip.file(`${root}/${fname}`, blobs[p.path]);
-		} else {
-			zip.file(`${root}/per-song/${song}/${fname}`, blobs[p.path]);
-			zip.file(`${root}/per-part/${p.part}/${fname}`, blobs[p.path]);
-		}
+		const bytes = await fetch(p.path).then(r => r.arrayBuffer());
+		const doc = await PDFLib.PDFDocument.load(bytes, {ignoreEncryption: true});
+		const pages = await merged.copyPages(doc, doc.getPageIndices());
+		pages.forEach(pg => merged.addPage(pg));
 	}
 
-	status.textContent = "Building zip…";
-	const blob = await zip.generateAsync({type: "blob"});
+	status.textContent = "Building PDF…";
+	const out = await merged.save();
 	const a = document.createElement("a");
-	a.href = URL.createObjectURL(blob);
-	a.download = root + ".zip";
+	a.href = URL.createObjectURL(new Blob([out], {type: "application/pdf"}));
+	a.download = sanitize(`Hanoun Brass Band - ${it.name} - ${want}`) + ".pdf";
 	a.click();
 	URL.revokeObjectURL(a.href);
 	status.textContent = `Done: ${picks.length} charts.` +
-		(missing.length ? ` No chart for your key in: ${missing.join(", ")}.` : "");
+		(missing.length ? ` No ${want} chart for your key in: ${missing.join(", ")}.` : "");
 }
 
-sel.addEventListener("change", suggestParts);
-suggestParts();
+sel.addEventListener("change", updateParts);
 document.getElementById("build").addEventListener("click", () => {
 	build().catch(e => { document.getElementById("status").textContent = "Error: " + e.message; });
 });
+loadManifest().catch(e => { document.getElementById("status").textContent = "Error: " + e.message; });
 </script>
