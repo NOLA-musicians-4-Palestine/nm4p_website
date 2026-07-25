@@ -1,64 +1,49 @@
 # Instrument -> chart key.
-#   token            : the <transposition>[-bass] key of the part chart to pick
-#                      (concert | Bb | Eb | F | concert-bass | Bb-bass | Eb-bass), or null
-#   aliases          : tokens of per-instrument charts (e.g. Tarweedeh) this player reads
-#   recommended_part : part pre-selected when this instrument is picked (high | mid | low)
+#   token   : the <transposition>[-bass] key of the part chart to pick
+#             (concert | Bb | Eb | F | concert-bass | Bb-bass | Eb-bass), or null
+#   aliases : tokens of per-instrument charts (e.g. Tarweedeh) this player reads
 # Edit freely: this drives the "Pick your instrument" dropdown.
 - name: Flute
   token: concert
   aliases: [flute]
-  recommended_part: high
 - name: Oboe
   token: concert
   aliases: [flute]
-  recommended_part: high
 - name: Violin
   token: concert
   aliases: [flute]
-  recommended_part: high
 - name: Clarinet
   token: Bb
   aliases: [trumpet]
-  recommended_part: high
 - name: Soprano Sax
   token: Bb
   aliases: [trumpet]
-  recommended_part: high
 - name: Trumpet
   token: Bb
   aliases: [trumpet]
-  recommended_part: high
 - name: Cornet
   token: Bb
   aliases: [trumpet]
-  recommended_part: mid
 - name: Alto Sax
   token: Eb
   aliases: [alto]
-  recommended_part: high
 - name: Tenor Sax
   token: Bb
   aliases: [tenor]
-  recommended_part: mid
 - name: Baritone Sax
   token: Eb
   aliases: [alto]
-  recommended_part: low
 - name: French Horn
   token: F
   aliases: []
-  recommended_part: mid
 - name: Trombone
   token: concert-bass
   aliases: [tuba]
-  recommended_part: mid
 - name: Euphonium
   label: Euphonium / Baritone
   token: concert-bass
   aliases: [tuba]
-  recommended_part: mid
 - name: Bass
   label: Tuba / Sousaphone / Bass
   token: concert-bass
   aliases: [tuba]
-  recommended_part: low
