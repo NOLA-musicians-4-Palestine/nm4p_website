@@ -80,6 +80,31 @@ jobs:
           source: ./
           destination: ./_site
 
+      # The demo player is a separate Vite app served at /epk. Checked out and
+      # built after Jekyll so its sources never end up in the Jekyll build.
+      - name: Checkout demo player
+        uses: actions/checkout@v4
+        with:
+          repository: nola-musicians-4-palestine/hanoun-demo-player
+          path: demo-player
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.30.3
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Build demo player into _site/epk
+        working-directory: demo-player
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec vite build --base=/epk/
+          cp -r dist ../_site/epk
+
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
