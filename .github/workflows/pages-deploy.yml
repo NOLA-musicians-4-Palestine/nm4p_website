@@ -103,7 +103,8 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpm exec vite build --base=/epk/
-          cp -r dist ../_site/epk
+          # _site is written by the Jekyll container as root.
+          sudo cp -r dist ../_site/epk
 
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
