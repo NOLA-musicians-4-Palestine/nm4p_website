@@ -1,0 +1,201 @@
+---
+layout: default
+title: Chart Book Builder
+---
+
+<div class="centered-section">
+	<h1>Build your chart book</h1>
+	<p>Choose your part/transposition and download all your charts as a PDF.</p>
+
+	<fieldset>
+		<legend><strong>1. Pick your part</strong></legend>
+		<label><input type="radio" name="part" value="high" checked> High <em>(melody)</em></label><br>
+		<label><input type="radio" name="part" value="mid"> Mid <em>(accompaniment)</em></label><br>
+		<label><input type="radio" name="part" value="low"> Low <em>(bass)</em></label>
+	</fieldset>
+
+	<p>
+		<label for="instrument"><strong>2. Pick your instrument</strong> (your key &amp; clef)</label><br>
+		<select id="instrument"></select><br>
+		<small>Instruments with no chart for the part you picked are greyed out.</small>
+	</p>
+
+	<p><button id="build" type="button">Download</button></p>
+	<p id="status"></p>
+
+	<h2>About the parts</h2>
+	<p>Most arrangements are split into three families of parts: <strong>high</strong>, <strong>mid</strong>, and <strong>low</strong>.</p>
+	<p><strong>High</strong> and <strong>mid</strong> share the melody and counter-melody. Usually the high
+	carries the main melody and the mid plays a counter-melody, but many arrangements trade these off &mdash;
+	the mid takes the melody while the high takes the counter-melody / accompaniment. Whichever way, high
+	generally sits in a higher register than mid. (These aren&rsquo;t &ldquo;harmonies&rdquo; in the Western sense:
+	Arabic music leans on melody and counter-melody rather than stacked chords, though a little harmony shows
+	up here and there.) <strong>Low</strong> parts are the bass line.</p>
+
+	<p>As we make more arrangements we&rsquo;re standardizing on this convention. <strong>High</strong> and
+	<strong>mid</strong> each come as part 1, part 2, or combined, in treble clef (C, B&flat;, E&flat;, F);
+	<strong>low</strong> comes in bass clef (C) or treble clef (E&flat;). Typically high-1 is trumpets and
+	high-2 is alto saxes / flutes, while mid-1 is trombones and mid-2 is tenor saxes.</p>
+	<p>Pick your part based on your instrument&rsquo;s range and whether you&rsquo;d rather live a bit more on
+	the melody side or the accompaniment side &mdash; knowing you&rsquo;ll do some of both. Not every song has
+	every part or key yet; anything missing for your choice is listed after you download.</p>
+</div>
+
+<script src="{{ '/assets/js/pdf-lib.min.js' | relative_url }}"></script>
+<script>
+// Named instruments from _data/instruments.yml, plus generic key fallbacks.
+const INSTRUMENTS = [
+{%- for i in site.data.instruments %}
+	{name: {{ i.name | jsonify }}, label: {{ i.label | default: i.name | jsonify }}, token: {{ i.token | jsonify }}, aliases: {{ i.aliases | jsonify }}},
+{%- endfor %}
+	{group: "Instrument not listed — pick your key"},
+	{name: "Concert pitch, treble clef (C)", token: "concert", aliases: ["flute"]},
+	{name: "Concert pitch, bass clef", token: "concert-bass", aliases: ["tuba"]},
+	{name: "B♭ (treble)", token: "Bb", aliases: ["trumpet"]},
+	{name: "E♭ (treble)", token: "Eb", aliases: ["alto"]},
+	{name: "F (treble)", token: "F", aliases: []},
+	{name: "B♭ (bass clef)", token: "Bb-bass", aliases: []},
+	{name: "E♭ (bass clef)", token: "Eb-bass", aliases: []},
+];
+
+const sel = document.getElementById("instrument");
+const PART_RE = /^(high|mid1|mid2|mid|low|both_mids)-(concert|Bb|Eb|F)(-bass)?$/;
+
+function parseFile(path) {
+	const parts = path.split("/");
+	const slug = parts[parts.indexOf("charts") + 1];
+	const base = parts.pop().replace(/\.pdf$/i, "");
+	const rest = base.slice(slug.length + 1); // strip "<slug>-"
+	if (rest === "score") return {slug, kind: "score"};
+	if (rest === "percussion") return {slug, kind: "inst", inst: "percussion", part: "percussion"};
+	const m = rest.match(PART_RE);
+	if (m) return {slug, kind: "part", part: m[1], token: m[2] + (m[3] || "")};
+	return {slug, kind: "inst", inst: rest, part: rest};
+}
+
+function partGroup(p) {
+	if (p.startsWith("high")) return "high";
+	if (p.startsWith("low")) return "low";
+	return "mid";
+}
+
+// Combined/single chart names preferred over the split sub-parts for a group.
+const COMBINED = {high: ["high"], mid: ["mid", "both_mids"], low: ["low"]};
+
+function sanitize(s) { return s.replace(/[\/\\]/g, " - "); }
+
+// Loaded once at page load.
+let MANIFEST = null;                       // {titles, files}
+let BY_SONG = {};                          // slug -> [parsed files]
+let TOKENS = {high: new Set(), mid: new Set(), low: new Set()}; // part -> tokens with charts
+let INST_CHARTS = new Set();               // per-instrument chart names (aliases)
+const partRadios = [...document.querySelectorAll('input[name="part"]')];
+
+async function loadManifest() {
+	MANIFEST = await fetch("{{ '/charts.json' | relative_url }}").then(r => r.json());
+	MANIFEST.files.forEach(path => {
+		const f = parseFile(path);
+		if (f.kind === "score") return;
+		(BY_SONG[f.slug] = BY_SONG[f.slug] || []).push({...f, path});
+		if (f.kind === "part") TOKENS[partGroup(f.part)].add(f.token);
+		if (f.kind === "inst") INST_CHARTS.add(f.inst);
+	});
+	renderInstruments();
+}
+
+function currentPart() {
+	return document.querySelector('input[name="part"]:checked').value;
+}
+
+// An instrument is available for a part if its key has a part chart there, or it
+// reads a per-instrument chart (e.g. Tarweedeh).
+function availableFor(it, part) {
+	if (it.token && TOKENS[part].has(it.token)) return true;
+	return it.aliases.some(a => INST_CHARTS.has(a));
+}
+
+// (Re)build the instrument dropdown for the current part, greying out any
+// instrument that has no chart for it.
+function renderInstruments() {
+	const part = currentPart();
+	const prev = sel.value;
+	sel.innerHTML = "";
+	INSTRUMENTS.forEach((it, idx) => {
+		if (it.group) {
+			const og = document.createElement("optgroup");
+			og.label = it.group;
+			og.dataset.idx = idx;
+			sel.appendChild(og);
+			return;
+		}
+		const opt = document.createElement("option");
+		opt.value = idx;
+		const ok = availableFor(it, part);
+		opt.textContent = (it.label || it.name) + (ok ? "" : ` — no ${part} chart`);
+		opt.disabled = !ok;
+		const lastGroup = INSTRUMENTS.slice(0, idx).reverse().find(x => x.group);
+		const og = lastGroup ? sel.querySelector(`optgroup[data-idx="${INSTRUMENTS.indexOf(lastGroup)}"]`) : null;
+		(og || sel).appendChild(opt);
+	});
+	// Keep the previous choice if it is still valid, else jump to the first enabled one.
+	const keep = [...sel.options].find(o => o.value === prev && !o.disabled);
+	sel.value = keep ? prev : ([...sel.options].find(o => !o.disabled) || {}).value || "";
+}
+
+async function build() {
+	const status = document.getElementById("status");
+	const it = INSTRUMENTS[+sel.value];
+	const want = currentPart();
+	const manifest = MANIFEST, bySong = BY_SONG;
+
+	// For each song: the combined part chart at this key (falling back to the split
+	// sub-parts), or the per-instrument chart this instrument reads.
+	const picks = [];   // {path, title}
+	const missing = [];
+	const slugs = Object.keys(bySong).sort((a, b) =>
+		(manifest.titles[a] || a).localeCompare(manifest.titles[b] || b));
+	for (const slug of slugs) {
+		const title = manifest.titles[slug] || slug;
+		const matching = bySong[slug]
+			.filter(f => f.kind === "part" && f.token === it.token && partGroup(f.part) === want);
+		const combined = matching.filter(f => COMBINED[want].includes(f.part));
+		let chosen = (combined.length ? combined : matching).sort((a, b) => a.part.localeCompare(b.part));
+		if (chosen.length === 0)
+			chosen = bySong[slug].filter(f => f.kind === "inst" && it.aliases.includes(f.inst));
+		if (chosen.length === 0) missing.push(title);
+		chosen.forEach(f => picks.push({path: f.path, title}));
+	}
+
+	if (picks.length === 0) {
+		status.textContent = "No charts match that selection.";
+		return;
+	}
+
+	// Merge every chart into one PDF.
+	const merged = await PDFLib.PDFDocument.create();
+	let done = 0;
+	for (const p of picks) {
+		status.textContent = `Fetching charts… ${++done}/${picks.length}`;
+		const bytes = await fetch(p.path).then(r => r.arrayBuffer());
+		const doc = await PDFLib.PDFDocument.load(bytes, {ignoreEncryption: true});
+		const pages = await merged.copyPages(doc, doc.getPageIndices());
+		pages.forEach(pg => merged.addPage(pg));
+	}
+
+	status.textContent = "Building PDF…";
+	const out = await merged.save();
+	const a = document.createElement("a");
+	a.href = URL.createObjectURL(new Blob([out], {type: "application/pdf"}));
+	a.download = sanitize(`Hanoun Brass Band - ${it.name} - ${want}`) + ".pdf";
+	a.click();
+	URL.revokeObjectURL(a.href);
+	status.textContent = `Done: ${picks.length} charts.` +
+		(missing.length ? ` No ${want} chart for your key in: ${missing.join(", ")}.` : "");
+}
+
+partRadios.forEach(r => r.addEventListener("change", renderInstruments));
+document.getElementById("build").addEventListener("click", () => {
+	build().catch(e => { document.getElementById("status").textContent = "Error: " + e.message; });
+});
+loadManifest().catch(e => { document.getElementById("status").textContent = "Error: " + e.message; });
+</script>

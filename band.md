@@ -4,6 +4,9 @@ layout: band
 
 ## [We Released An Album!]({{"from_new_orleans_to_palestine.html" | relative_url}})
 
+<h3>📥 <a href="{{ "/charts.html" | relative_url }}">Build your chart book</a></h3>
+<p>Choose your part/transposition and download all your charts as a PDF.</p>
+
 <div class="olive-pattern-bg">
     <h2>Rep List</h2>
 </div>

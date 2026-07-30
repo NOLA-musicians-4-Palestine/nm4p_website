@@ -9,6 +9,10 @@ layout: default
 	<hr>
 
 	<h2>Charts</h2>
+	<p style="padding: 0.75em 1em; border: 2px solid currentColor; border-radius: 6px; font-size: 1.1em;">
+		⚠️ <strong>Confused about which part to pick?</strong>
+		Check out our <a href="{{ '/charts.html' | relative_url }}"><strong>chart builder</strong></a>.
+	</p>
 	<ul>
 	{% assign chart_files = site.static_files | where_exp: "chart_file", "chart_file.path contains page.charts_folder" %}
 	{% for chart in chart_files %}
