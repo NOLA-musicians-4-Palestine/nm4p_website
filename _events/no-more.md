@@ -1,5 +1,7 @@
 ---
 title: Contribute to this calendar
+# Placeholder card pinned to the end of the calendar, not a real event.
+schema: false
 date: 2030-01-01
 time: 
 location: 
