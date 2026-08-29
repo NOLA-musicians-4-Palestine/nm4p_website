@@ -1,10 +1,33 @@
 title: Nola Musicians for Palestine
+tagline: New Orleans musicians in solidarity with Palestine
+description: >-
+  New Orleans musicians organizing in solidarity with Palestine. Read and sign
+  our solidarity statement, find upcoming events and benefit shows across New
+  Orleans, and explore our rep list, charts, and recordings.
+url: https://nolamusicians4palestine.net
+logo: /assets/images/logo-favicon.png
+lang: en_US
 
-exclude: 
+social:
+  name: NOLA Musicians for Palestine
+  links:
+    - https://www.instagram.com/nolamusicians4palestine/
+    - https://hanounbrassband.bandcamp.com/
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
   - assets/recordings/src/
   - assets/images/event_flyers/old/
   - assets/images/Workspace/
   - _events/old/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - Gemfile.lock.bak
+  - tools/
 
 
 collections:
@@ -14,6 +37,18 @@ collections:
 
 
 defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/homepage_photos/photo_0.jpg
+
+  # Charts and recordings are ~150 near-duplicate per-instrument files. They
+  # stay crawlable via the song pages; they just don't belong in the sitemap.
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false
+
   - scope:
       path: ""
       type: "pages"

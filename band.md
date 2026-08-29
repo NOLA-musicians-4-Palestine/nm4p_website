@@ -1,4 +1,7 @@
 ---
+title: Hanoun Brass Band
+description: >-
+  Hanoun Brass Band, the New Orleans brass band of NOLA Musicians for Palestine: our rep list, charts, recordings, and how to play with us.
 layout: band
 ---
 
