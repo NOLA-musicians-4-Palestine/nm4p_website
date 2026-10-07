@@ -3,6 +3,7 @@ import os
 import pytz
 import yaml
 import datetime
+from caldav import get_davclient
 from googleapiclient.http import MediaIoBaseDownload
 from slugify import slugify
 from googleapiclient.discovery import build
@@ -168,7 +169,81 @@ def run():
         with open(post_path, "w") as f:
             f.write(frontmatter.dumps(post))
 
+def get_flyer(attachment_location):
+	# download the attachment to the correct place
 
-# Example usage
+    def destination_filename(attachment):
+        extension = f".{attachment['mimeType'].split('/')[-1]}"
+        return slugify(attachment["title"].split(extension)[0]) + extension
+
+    file_name = destination_filename(attachment)
+    file_path = f"assets/images/event_flyers/{file_name}"
+
+    with open(file_path, "wb") as file:
+        request = service.files().get_media(fileId=attachment["fileId"])
+        downloader = MediaIoBaseDownload(file, request)
+        done = False
+        while not done:
+            status, done = downloader.next_chunk()
+            print(f"Download progress: {int(status.progress()) * 100}%")
+
+        print(f"Downloaded {file_name} to {file_path}")
+    return file_name
+
+	# return the file name
+	#return None
+
+def create_post_from_event(event):
+	start = event.decoded("dtstart")
+	end = event.decoded("dtend")
+
+	day = start.date() if isinstance(start, datetime.datetime) else start
+	is_all_day = isinstance(start, datetime.date) and not isinstance(start, datetime.datetime)
+
+	post = read_event_template("_events/no-more.md")
+
+	post.metadata["title"] = event.decoded("summary")
+	post.metadata["date"] = day.isoformat()
+	#post.metadata["flyer"] = get_flyer(event.decoded("attach"))
+
+	print(event.get("attach").params)
+
+	if not is_all_day:
+		post.metadata["time"] = f"{start.time()} - {end.time()}"
+
+	if "location" in event:
+		post.metadata["location"] = event.decoded("location")
+
+	post.content = event.decoded("description")
+	return post
+
+
+def nextcloud_run():
+	print("Nextcloud Run")
+	with get_davclient() as client:
+		print("Connecting to NM4P Cloud Server")
+
+		solidarity_network_calendar = client.calendar(url="https://cloud.nm4p.net/remote.php/dav/calendars/nomis/solidarity-network/")
+
+		# Search for events
+		events = solidarity_network_calendar.search(
+			start=datetime.datetime.now(),
+			end=datetime.datetime.now() + datetime.timedelta(weeks=6),
+			event=True,
+			expand=True,
+		)
+		print(f"Found {len(events)} events in the next 6 weeks")
+
+		posts = [create_post_from_event(event.component) for event in events]
+		print(posts)
+		for post in posts:
+			print(post)
+			post_path = f"./_events/{post.metadata['date']}-{slugify(post.metadata['title'])}.html"
+			print(post_path)
+			with open(post_path, "w") as f:
+				f.write(frontmatter.dumps(post))
+
+
 if __name__ == "__main__":
-    run()
+	nextcloud_run()
+    #run()

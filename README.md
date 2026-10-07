@@ -14,6 +14,7 @@ TODO: write down how to install the necessary components, like podman, ruby and 
 
 ```bash
 podman run --rm \
+
   -w /workspace \
   -v [your path here]/nm4p_website:/workspace:z \
   localhost/nm4p-tools:latest \
@@ -39,17 +40,25 @@ To deploy this site from the `live` branch using the [included action](.github/w
 # Website Wishlist
 
 - [ ] know who's QR codes were scanned
+  
   - xmlhttp request to hit an api on our cloud
 
 - [ ] more photos
+
 - [ ] date-based navigation, filters
+
 - [ ] handle old events better
+
 - [ ] download events in batches of 10 dynamically
+  
   - the pages are pre-rendered by jekyll, just not served
+
 - [x] make something to show for when there are no upcoming events
 
 - [ ] Blog
+
 - [ ] content pulled from nm4p cloud
+  
   - song contexts
   - pdfs
   - resources page
@@ -57,5 +66,7 @@ To deploy this site from the `live` branch using the [included action](.github/w
   - chant list
 
 - [ ] make sure everything that needs to be environment variables are that way
+  
   - [ ] document how to clone the repository and make your own
+
 - [ ] pull events from multiple sources
