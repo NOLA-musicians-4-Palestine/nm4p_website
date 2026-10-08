@@ -8,5 +8,5 @@ RUN apt-get update && \
         python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install ipython python-frontmatter google-api-python-client google-auth-httplib2 google-auth-oauthlib pytz python-slugify packaging caldav
+RUN pip install ipython python-frontmatter google-api-python-client google-auth-httplib2 google-auth-oauthlib pytz python-slugify packaging caldav requests
 

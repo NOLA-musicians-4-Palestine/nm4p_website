@@ -3,6 +3,8 @@ import os
 import pytz
 import yaml
 import datetime
+import requests
+from pathlib import PurePosixPath
 from caldav import get_davclient
 from googleapiclient.http import MediaIoBaseDownload
 from slugify import slugify
@@ -169,29 +171,49 @@ def run():
         with open(post_path, "w") as f:
             f.write(frontmatter.dumps(post))
 
-def get_flyer(attachment_location):
-	# download the attachment to the correct place
+def get_flyer(attachment_params):
+	# download the attachment
 
-    def destination_filename(attachment):
-        extension = f".{attachment['mimeType'].split('/')[-1]}"
-        return slugify(attachment["title"].split(extension)[0]) + extension
+	## use the ID to make a WebDAV request for a direct download link
+	file_id = attachment_params["X-NC-FILE-ID"]
 
-    file_name = destination_filename(attachment)
-    file_path = f"assets/images/event_flyers/{file_name}"
+	url = "https://cloud.nm4p.net/ocs/v2.php/apps/dav/api/v1/direct"
 
-    with open(file_path, "wb") as file:
-        request = service.files().get_media(fileId=attachment["fileId"])
-        downloader = MediaIoBaseDownload(file, request)
-        done = False
-        while not done:
-            status, done = downloader.next_chunk()
-            print(f"Download progress: {int(status.progress()) * 100}%")
+	response = requests.post(
+		url,
+		auth = (os.getenv("CALDAV_USERNAME"), os.getenv("CALDAV_PASSWORD")),
+		headers = {
+				"Accept": "application/json",
+				"OCS-APIRequest": "true",
+			},
+			json={
+				"fileId": file_id,
+				"expirationTime": 300,
+			},
+			timeout=30,
+		)
 
-        print(f"Downloaded {file_name} to {file_path}")
-    return file_name
+	response.raise_for_status()
+	result = response.json()
 
-	# return the file name
-	#return None
+	direct_link = result["ocs"]["data"]["url"]
+
+	## construct the name and path to save the file
+	extension = f".{attachment_params['FMTTYPE'].split('/')[-1]}"
+	filename = slugify(PurePosixPath(attachment_params["FILENAME"]).stem) + extension
+	file_path = f"assets/images/event_flyers/{filename}"
+
+	## download the file
+
+	with requests.get(direct_link, stream=True, timeout=60) as response:
+		response.raise_for_status()
+
+		with open(file_path, "wb") as f:
+			for chunk in response.iter_content(chunk_size=1024 * 1024):
+				if chunk:
+					f.write(chunk)
+
+	return filename
 
 def create_post_from_event(event):
 	start = event.decoded("dtstart")
@@ -204,9 +226,14 @@ def create_post_from_event(event):
 
 	post.metadata["title"] = event.decoded("summary")
 	post.metadata["date"] = day.isoformat()
-	#post.metadata["flyer"] = get_flyer(event.decoded("attach"))
 
-	print(event.get("attach").params)
+	if event.get("attach") is not None:
+		# if it's a list get the first one
+		attachment_params = event.get("attach")[0].params if isinstance(event.get("attach"), list) else event.get("attach").params
+		post.metadata["flyer"] = get_flyer(attachment_params)
+	else:
+		post.metadata["flyer"] = ""
+
 
 	if not is_all_day:
 		post.metadata["time"] = f"{start.time()} - {end.time()}"
