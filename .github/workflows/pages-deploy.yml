@@ -38,7 +38,7 @@ jobs:
       CALDAV_USERNAME: "${{ secrets.CALDAV_USERNAME }}"
       CALDAV_PASSWORD: "${{ secrets.CALDAV_PASSWORD }}"
       CALDAV_URL: "${{ secrets.CALDAV_URL }}"
-		
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
