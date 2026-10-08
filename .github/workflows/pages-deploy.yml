@@ -34,11 +34,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      CALDAV_USERNAME: "${{ secrets.CALDAV_USERNAME }}"
-      CALDAV_PASSWORD: "${{ secrets.CALDAV_PASSWORD }}"
-      CALDAV_URL: "${{ secrets.CALDAV_URL }}"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,6 +68,11 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Fetch and Render Events from Google Calendar
+        env:
+          CALDAV_USERNAME: ${{ secrets.CALDAV_USERNAME }}
+          CALDAV_PASSWORD: ${{ secrets.CALDAV_PASSWORD }}
+          CALDAV_URL: ${{ secrets.CALDAV_URL }}
+
         run: |
           docker run --rm \
           -w /workspace \
