@@ -247,6 +247,11 @@ def create_post_from_event(event):
 
 def nextcloud_run():
 	print("Nextcloud Run")
+
+	print("do the environment variables exist?")
+	for name in ("CALDAV_URL", "CALDAV_USERNAME", "CALDAV_PASSWORD"):
+		print(f"{name} set: {bool(os.getenv(name))}")
+
 	with get_davclient() as client:
 		print("Connecting to NM4P Cloud Server")
 
