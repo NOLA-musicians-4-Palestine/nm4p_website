@@ -14,7 +14,7 @@ TODO: write down how to install the necessary components, like podman, ruby and 
 
 ```bash
 podman run --rm \
-
+  --env 'CALDAV*' \ # you need these environment variables set to authenticate with nm4p cloud. on the github action, they need to be set individually
   -w /workspace \
   -v [your path here]/nm4p_website:/workspace:z \
   localhost/nm4p-tools:latest \

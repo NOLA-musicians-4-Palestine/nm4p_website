@@ -76,7 +76,9 @@ jobs:
 
         run: |
           docker run --rm \
-          --env 'CALDAV*' \
+          -e CALDAV_USERNAME \
+          -e CALDAV_PASSWORD \
+          -e CALDAV_URL \
           -w /workspace \
           -v ${{ github.workspace }}:/workspace \
           ghcr.io/${{ steps.lower.outputs.owner}}/${{ steps.lower.outputs.repo}}/tools:${{ steps.lower.outputs.ref }} \
