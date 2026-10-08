@@ -248,10 +248,6 @@ def create_post_from_event(event):
 def nextcloud_run():
 	print("Nextcloud Run")
 
-	print("do the environment variables exist?")
-	for name in ("CALDAV_URL", "CALDAV_USERNAME", "CALDAV_PASSWORD"):
-		print(f"{name} set: {bool(os.getenv(name))}")
-
 	with get_davclient() as client:
 		print("Connecting to NM4P Cloud Server")
 
@@ -267,9 +263,7 @@ def nextcloud_run():
 		print(f"Found {len(events)} events in the next 6 weeks")
 
 		posts = [create_post_from_event(event.component) for event in events]
-		print(posts)
 		for post in posts:
-			print(post)
 			post_path = f"./_events/{post.metadata['date']}-{slugify(post.metadata['title'])}.html"
 			print(post_path)
 			with open(post_path, "w") as f:
