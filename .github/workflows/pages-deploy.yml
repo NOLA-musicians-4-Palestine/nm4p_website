@@ -34,10 +34,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
-	env:
-		CALDAV_USERNAME: ${{secrets.CALDAV_USERNAME}}
-		CALDAV_PASSWORD: ${{secrets.CALDAV_PASSWORD}}
-		CALDAV_URL: ${{secrets.CALDAV_URL}}
+    env:
+      CALDAV_USERNAME: "${{ secrets.CALDAV_USERNAME }}"
+      CALDAV_PASSWORD: "${{ secrets.CALDAV_PASSWORD }}"
+      CALDAV_URL: "${{ secrets.CALDAV_URL }}"
 		
     steps:
       - name: Checkout
