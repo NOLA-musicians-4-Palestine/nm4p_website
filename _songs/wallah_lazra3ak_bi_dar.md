@@ -6,7 +6,7 @@ recordings_folder: assets/recordings/wallah_lazra3ak_bi_dar
 reference_recordings:
   - https://www.facebook.com/reel/868815621273744/?referral_source=vod_deeplink_unit&surface_type=vod
   - https://www.youtube.com/watch?v=tu3yn_Gj3vI
-status: learning
+status: current
 arranger: Simon Moushabeck
 ---
 
