@@ -1,0 +1,48 @@
+{
+  "event": {
+    "form": {
+      "id": 4,
+      "hash": "jZDtnWmBD67nHQSP",
+      "title": "NM4P Event Submission Form",
+      "description": "",
+      "ownerId": "nomis",
+      "fileId": null,
+      "fileFormat": null,
+      "created": 1786149943,
+      "access": {
+        "permitAllUsers": false,
+        "showToAllUsers": false
+      },
+      "expires": 0,
+      "isAnonymous": false,
+      "submitMultiple": true,
+      "allowEditSubmissions": false,
+      "showExpiration": false,
+      "lastUpdated": 1793408552,
+      "submissionMessage": "# Event Submitted!\n\nThanks for helping strengthen our network!\n\nEvents may take a couple hours to show up on the website",
+      "state": 0,
+      "lockedBy": "nomis",
+      "lockedUntil": 1793409348,
+      "maxSubmissions": null,
+      "confirmationEmailEnabled": false,
+      "confirmationEmailSubject": null,
+      "confirmationEmailBody": null,
+      "confirmationEmailQuestionId": null,
+      "allowComments": false
+    },
+    "submission": {
+      "id": 12,
+      "formId": 4,
+      "userId": "nomis",
+      "timestamp": 1793408551
+    },
+    "class": "OCA\\Forms\\Events\\FormSubmittedEvent"
+  },
+  "user": {
+    "uid": "nomis",
+    "displayName": "Simon"
+  },
+  "time": 1793408553,
+  "authentication": []
+}
+
