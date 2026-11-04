@@ -1,11 +1,12 @@
 #calendar{
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
 	align-items: center;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	height: 75vh;
-	@media only screen and (max-width: 700px){ height: 54vh; }
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 90vh;
+	width: 90vw;
+	margin: auto;
 
 	box-shadow: 0 0 25px -10px black;
 	border-top: solid 10px;
@@ -15,11 +16,12 @@
 
 	scrollbar-color: red white;
 
-	.event{
-		margin: 10px;
-		border: 4px solid;
+	@media only screen and (min-width: 700px){ max-width: min(950px, 90vw); }
 
-		height: 90%;
+	.event{
+
+		height: 100%;
+		max-width: 90%;
 		position: relative;
 		.info {
 			bottom: 0;
@@ -67,6 +69,7 @@
 		.flyer {
 			object-fit: contain;
 			height: 100%;
+			max-width: 100%;
 			/* flex: 1 1 auto; */
 		}
 	}
