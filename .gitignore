@@ -7,3 +7,5 @@ tools/token.json
 tools/service-account-file.json
 *.swp
 .DS_Store
+_events/*
+!_events/no-more.md
