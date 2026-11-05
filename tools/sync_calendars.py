@@ -224,7 +224,7 @@ def create_post_from_event(event):
 
 	post = read_event_template("_events/no-more.md")
 
-	post.metadata["title"] = event.decoded("summary")
+	post.metadata["title"] = event.decoded("summary") if "summary" in event else ""
 	post.metadata["date"] = day.isoformat()
 
 	if event.get("attach") is not None:
@@ -239,9 +239,9 @@ def create_post_from_event(event):
 		post.metadata["time"] = f"{start.time()} - {end.time()}"
 
 	if "location" in event:
-		post.metadata["location"] = event.decoded("location")
+		post.metadata["location"] = event.decoded("location") if "location" in event else ""
 
-	post.content = event.decoded("description")
+	post.content = event.decoded("description") if "description" in event else ""
 	return post
 
 

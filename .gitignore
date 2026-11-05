@@ -9,3 +9,4 @@ tools/service-account-file.json
 .DS_Store
 _events/*
 !_events/no-more.md
+assets/images/event_flyers/*
