@@ -15,10 +15,21 @@ layout: default
 	</p>
 	<ul>
 	{% assign chart_files = site.static_files | where_exp: "chart_file", "chart_file.path contains page.charts_folder" %}
-	{% for chart in chart_files %}
+	{% for chart in chart_files %}{% if chart.extname != ".mscz" %}
 		<li><a target="_blank" href="{{ chart.path | relative_url }}">{{ chart.basename }}</a></li>
+	{% endif %}{% endfor %}
+	</ul>
+
+	{% assign score_files = chart_files | where: "extname", ".mscz" %}
+	{% if score_files.size > 0 %}
+	<h3>Edit the arrangement</h3>
+	<p>Open these with <a target="_blank" href="https://musescore.org/">MuseScore Studio</a> (free) to change the arrangement or export your own part.</p>
+	<ul>
+	{% for score in score_files %}
+		<li><a href="{{ score.path | relative_url }}" download>{{ score.name }}</a></li>
 	{% endfor %}
 	</ul>
+	{% endif %}
 
 	<hr>
 
