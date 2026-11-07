@@ -20,6 +20,15 @@ title: Chart Book Builder
 		<small>Instruments with no chart for the part you picked are greyed out.</small>
 	</p>
 
+	<p>
+		<label><input type="checkbox" id="pick-songs"> <strong>Pick specific songs</strong></label>
+	</p>
+	<fieldset id="songs-box" hidden>
+		<legend><strong>3. Pick your songs</strong></legend>
+		<div id="songs"></div>
+		<small>To share a set list, tick its songs and copy this page&rsquo;s address.</small>
+	</fieldset>
+
 	<p><button id="build" type="button">Download</button></p>
 	<p id="status"></p>
 
@@ -101,6 +110,53 @@ async function loadManifest() {
 		if (f.kind === "inst") INST_CHARTS.add(f.inst);
 	});
 	renderInstruments();
+	renderSongs();
+}
+
+function songTitle(slug) { return MANIFEST.titles[slug] || slug; }
+
+// Songs in the book: everything but the "future" ones we have no arrangement for yet.
+function bookSongs() {
+	return Object.keys(MANIFEST.titles)
+		.filter(slug => MANIFEST.status[slug] !== "future")
+		.sort((a, b) => songTitle(a).localeCompare(songTitle(b)));
+}
+
+const pickSongs = document.getElementById("pick-songs");
+
+// A ?songs=slug,slug link opens the song list with those songs ticked; while it is
+// open, the URL follows the ticks so the page address can be shared as a set list.
+function renderSongs() {
+	const box = document.getElementById("songs");
+	const preset = new URLSearchParams(location.search).get("songs")?.split(",");
+	bookSongs().forEach(slug => {
+		const status = MANIFEST.status[slug];
+		const hasCharts = slug in BY_SONG;
+		const check = Object.assign(document.createElement("input"), {
+			type: "checkbox", name: "song", value: slug, disabled: !hasCharts,
+			checked: hasCharts && (!preset || preset.includes(slug))});
+		const note = !hasCharts ? " (no charts yet)" : status && status !== "current" ? ` (${status})` : "";
+		const label = document.createElement("label");
+		label.append(check, " " + songTitle(slug) + note);
+		box.append(label, document.createElement("br"));
+	});
+	box.addEventListener("change", syncSongsUrl);
+	pickSongs.addEventListener("change", showSongs);
+	pickSongs.checked = !!preset;
+	showSongs();
+}
+
+function showSongs() {
+	document.getElementById("songs-box").hidden = !pickSongs.checked;
+	syncSongsUrl();
+}
+
+function syncSongsUrl() {
+	history.replaceState(null, "", pickSongs.checked ? "?songs=" + checkedSongs().join(",") : location.pathname);
+}
+
+function checkedSongs() {
+	return [...document.querySelectorAll('input[name="song"]:checked')].map(c => c.value);
 }
 
 function currentPart() {
@@ -152,8 +208,11 @@ async function build() {
 	// sub-parts), or the per-instrument chart this instrument reads.
 	const picks = [];   // {path, title}
 	const missing = [];
-	const slugs = Object.keys(bySong).sort((a, b) =>
-		(manifest.titles[a] || a).localeCompare(manifest.titles[b] || b));
+	const slugs = pickSongs.checked ? checkedSongs() : bookSongs().filter(slug => slug in bySong);
+	if (slugs.length === 0) {
+		status.textContent = "Pick at least one song.";
+		return;
+	}
 	for (const slug of slugs) {
 		const title = manifest.titles[slug] || slug;
 		const matching = bySong[slug]
