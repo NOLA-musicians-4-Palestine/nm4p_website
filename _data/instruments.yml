@@ -1,7 +1,7 @@
 # Instrument -> chart key.
 #   token   : the <transposition>[-bass] key of the part chart to pick
 #             (concert | Bb | Eb | F | concert-bass | Bb-bass | Eb-bass), or null
-#   aliases : tokens of per-instrument charts (e.g. Tarweedeh) this player reads
+#   aliases : per-instrument charts (e.g. Tarweedeh) this player reads, in order of preference
 # Edit freely: this drives the "Pick your instrument" dropdown.
 - name: Flute
   token: concert
@@ -14,7 +14,7 @@
   aliases: [flute]
 - name: Clarinet
   token: Bb
-  aliases: [trumpet]
+  aliases: [clarinet, trumpet]
 - name: Soprano Sax
   token: Bb
   aliases: [trumpet]
@@ -32,17 +32,17 @@
   aliases: [tenor]
 - name: Baritone Sax
   token: Eb
-  aliases: [alto]
+  aliases: [bari, alto]
 - name: French Horn
   token: F
-  aliases: []
+  aliases: [horn]
 - name: Trombone
   token: concert-bass
-  aliases: [tuba]
+  aliases: [trombone, tuba]
 - name: Euphonium
   label: Euphonium / Baritone
   token: concert-bass
-  aliases: [tuba]
+  aliases: [trombone, tuba]
 - name: Bass
   label: Tuba / Sousaphone / Bass
   token: concert-bass

@@ -68,7 +68,8 @@ const INSTRUMENTS = [
 ];
 
 const sel = document.getElementById("instrument");
-const PART_RE = /^(high|mid1|mid2|mid|low|both_mids)-(concert|Bb|Eb|F)(-bass)?$/;
+// "all" charts (e.g. a lead sheet) are read by every part.
+const PART_RE = /^(all|high|mid1|mid2|mid|low|both_mids)-(concert|Bb|Eb|F)(-bass)?$/;
 
 function parseFile(path) {
 	const parts = path.split("/");
@@ -106,7 +107,7 @@ async function loadManifest() {
 		const f = parseFile(path);
 		if (f.kind === "score") return;
 		(BY_SONG[f.slug] = BY_SONG[f.slug] || []).push({...f, path});
-		if (f.kind === "part") TOKENS[partGroup(f.part)].add(f.token);
+		if (f.kind === "part") (f.part === "all" ? ["high", "mid", "low"] : [partGroup(f.part)]).forEach(g => TOKENS[g].add(f.token));
 		if (f.kind === "inst") INST_CHARTS.add(f.inst);
 	});
 	renderInstruments();
@@ -216,11 +217,13 @@ async function build() {
 	for (const slug of slugs) {
 		const title = manifest.titles[slug] || slug;
 		const matching = bySong[slug]
-			.filter(f => f.kind === "part" && f.token === it.token && partGroup(f.part) === want);
+			.filter(f => f.kind === "part" && f.token === it.token && (f.part === "all" || partGroup(f.part) === want));
 		const combined = matching.filter(f => COMBINED[want].includes(f.part));
 		let chosen = (combined.length ? combined : matching).sort((a, b) => a.part.localeCompare(b.part));
-		if (chosen.length === 0)
-			chosen = bySong[slug].filter(f => f.kind === "inst" && it.aliases.includes(f.inst));
+		if (chosen.length === 0) {
+			const inst = it.aliases.find(a => bySong[slug].some(f => f.kind === "inst" && f.inst === a));
+			chosen = bySong[slug].filter(f => f.kind === "inst" && f.inst === inst);
+		}
 		if (chosen.length === 0) missing.push(title);
 		chosen.forEach(f => picks.push({path: f.path, title}));
 	}
