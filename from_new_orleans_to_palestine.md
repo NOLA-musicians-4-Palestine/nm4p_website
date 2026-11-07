@@ -1,5 +1,9 @@
 ---
+title: From New Orleans to Palestine
+description: >-
+  Hanoun Brass Band's debut album, From New Orleans to Palestine, released November 26th 2025. All proceeds are donated to organizations supporting Palestinian rights.
 layout: ana_dammi_falastini
+image: /assets/images/from_new_orleans_to_palestine.jpeg
 ---
 
 <style>

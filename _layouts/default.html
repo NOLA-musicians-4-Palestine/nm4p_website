@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.title }}</title>
+    {% seo %}
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
     <link rel="icon"
           type="image/x-icon"
@@ -14,12 +14,21 @@
     <div id="site-url" style="display: none;">{{ site.url }}{{ site.baseurl }}</div>
     <header data-num-images="5">
       <div id="header-img-mask"></div>
-      <h1 id="title">{{ site.title }}</h1>  
+      {%- comment -%}
+        The banner is the homepage's <h1>. Interior pages get their own <h1>
+        from page.title below, so the banner drops to a div there.
+      {%- endcomment -%}
+      {% if page.url == '/' %}
+        <h1 id="title">{{ site.title }}</h1>
+      {% else %}
+        <div id="title">{{ site.title }}</div>
+      {% endif %}
       {% include nav.html %}
     </header>
     <script src="{{ '/assets/js/header_images.js' | relative_url }}"></script>
     {% include flag.html %}
     <main>
+      {% if page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
       {{ content }}
     </main>
     {% include flag.html %}

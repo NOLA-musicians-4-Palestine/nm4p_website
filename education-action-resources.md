@@ -1,4 +1,7 @@
 ---
+title: Education and Action Resources
+description: >-
+  Ways to take action for Palestine from New Orleans, plus reading, listening, and mutual aid resources for learning more about Palestinian liberation.
 layout: education-action-resources
 ---
 

@@ -27,6 +27,15 @@ body{
 	font-size: 1.3em;
 }
 
+.page-title{
+	text-align: center;
+	padding: 20px 20px 0px;
+	margin: 0px;
+	font-family: "Josefin Slab";
+	font-weight: bold;
+	font-size: 1.8em;
+}
+
 .net-pattern-bg > h2{
 	background-color: white;
 	margin: 30px;
@@ -84,6 +93,8 @@ header{
 
 #title{
 	font-family: "Josefin Slab";
+	// Matches the browser default this used to inherit as an <h1>.
+	font-size: 2em;
 	font-weight: bold;
 	z-index: 1;
 	margin: 0;

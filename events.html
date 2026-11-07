@@ -1,5 +1,62 @@
 ---
+title: Upcoming Events
+description: >-
+  Upcoming Palestine solidarity events, benefit shows, and actions in New Orleans, from NOLA Musicians for Palestine, our signatories, and the New Orleans Coalition for Palestine.
 ---
+{%- comment -%}
+  Event rich results. The site rebuilds hourly, so filtering on `now` keeps
+  past events out of the feed Google sees.
+{%- endcomment -%}
+{%- assign today = 'now' | date: '%Y-%m-%d' -%}
+{%- capture event_items -%}
+  {%- assign upcoming = site.events | where_exp: "e", "e.date" | sort: "date" -%}
+  {%- assign position = 0 -%}
+  {%- for event in upcoming -%}
+    {%- assign event_date = event.date | date: '%Y-%m-%d' -%}
+    {%- if event_date >= today and event.schema != false -%}
+      {%- assign position = position | plus: 1 -%}
+      {%- if position > 1 %},{% endif %}
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "item": {
+          "@type": "Event",
+          "name": {{ event.title | jsonify }},
+          "startDate": {{ event_date | jsonify }},
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "url": {{ '/events.html' | absolute_url | jsonify }},
+          "description": {{ event.content | strip_html | normalize_whitespace | strip | truncate: 300 | jsonify }},
+          "location": {
+            "@type": "Place",
+            "name": {{ event.location | default: "New Orleans" | jsonify }},
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "New Orleans",
+              "addressRegion": "LA",
+              "addressCountry": "US"
+            }
+          },
+          "organizer": {
+            "@type": "Organization",
+            "name": {{ site.title | jsonify }},
+            "url": {{ '/' | absolute_url | jsonify }}
+          }
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- comment -%} `position` survives the capture block. {%- endcomment -%}
+{%- if position > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [{{ event_items }}]
+}
+</script>
+{%- endif -%}
 <div class="centered-section">
 
 	{% include quick_links.html %}

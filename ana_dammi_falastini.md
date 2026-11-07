@@ -1,5 +1,9 @@
 ---
+title: Ana Dammi Falastini
+description: >-
+  Hanoun Brass Band's single Ana Dammi Falastini, an arrangement of Mohammed Assaf's anthem asserting the immutability of Palestinian identity.
 layout: ana_dammi_falastini
+image: /assets/images/ana_dammi_falastini.jpg
 ---
 
 <style>
