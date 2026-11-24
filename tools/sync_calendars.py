@@ -4,7 +4,7 @@ import pytz
 import yaml
 import datetime
 import requests
-from pathlib import PurePosixPath
+from pathlib import PurePosixPath, Path
 from caldav import get_davclient
 from googleapiclient.http import MediaIoBaseDownload
 from slugify import slugify
@@ -199,7 +199,8 @@ def get_flyer(attachment_params):
 	direct_link = result["ocs"]["data"]["url"]
 
 	## construct the name and path to save the file
-	extension = f".{attachment_params['FMTTYPE'].split('/')[-1]}"
+
+	extension = Path(attachment_params.get("FILENAME", "")).suffix
 	filename = slugify(PurePosixPath(attachment_params["FILENAME"]).stem) + extension
 	file_path = f"assets/images/event_flyers/{filename}"
 
