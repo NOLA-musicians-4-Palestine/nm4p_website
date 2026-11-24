@@ -201,9 +201,6 @@ def get_flyer(attachment_params):
 	## construct the name and path to save the file
 
 	extension = Path(attachment_params.get("FILENAME", "")).suffix
-	print("suffix:")
-	print(extension)
-	#extension = f".{attachment_params['FMTTYPE'].split('/')[-1]}"
 	filename = slugify(PurePosixPath(attachment_params["FILENAME"]).stem) + extension
 	file_path = f"assets/images/event_flyers/{filename}"
 
