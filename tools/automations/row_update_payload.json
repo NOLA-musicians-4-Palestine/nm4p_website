@@ -1,7 +1,7 @@
 {
   "event": {
     "tableId": 29,
-    "rowId": 311,
+    "rowId": 314,
     "previousValues": [
       {
         "columnId": 175,
@@ -13,19 +13,27 @@
       },
       {
         "columnId": 180,
-        "value": "deets"
+        "value": "change deets"
       },
       {
         "columnId": 181,
         "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
       },
       {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
         "columnId": 177,
         "value": "2026-10-31"
       },
       {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
         "columnId": 178,
-        "value": "true"
+        "value": "false"
       }
     ],
     "values": [
@@ -39,19 +47,27 @@
       },
       {
         "columnId": 180,
-        "value": "deets"
+        "value": "change deets"
       },
       {
         "columnId": 181,
         "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
       },
       {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
         "columnId": 177,
         "value": "2026-10-31"
       },
       {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
         "columnId": 178,
-        "value": "false"
+        "value": "true"
       }
     ],
     "dataByAlias": {
@@ -65,19 +81,27 @@
       },
       "details": {
         "columnId": 180,
-        "value": "deets"
+        "value": "change deets"
       },
-      "column_181": {
+      "flyer": {
         "columnId": 181,
         "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      "flyer_file_id": {
+        "columnId": 183,
+        "value": "7631"
       },
       "date": {
         "columnId": 177,
         "value": "2026-10-31"
       },
+      "time": {
+        "columnId": 182,
+        "value": "20:01"
+      },
       "approved": {
         "columnId": 178,
-        "value": "false"
+        "value": "true"
       }
     },
     "class": "OCA\\Tables\\Event\\RowUpdatedEvent"
@@ -86,7 +110,6 @@
     "uid": "nomis",
     "displayName": "Simon"
   },
-  "time": 1794084682,
+  "time": 1795550730,
   "authentication": []
 }
-

@@ -1,0 +1,349 @@
+un-approved
+{
+  "event": {
+    "tableId": 29,
+    "rowId": 314,
+    "previousValues": [
+      {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      {
+        "columnId": 180,
+        "value": "deets"
+      },
+      {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
+        "columnId": 178,
+        "value": "true"
+      }
+    ],
+    "values": [
+      {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      {
+        "columnId": 180,
+        "value": "deets"
+      },
+      {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
+        "columnId": 178,
+        "value": "false"
+      }
+    ],
+    "dataByAlias": {
+      "event_name": {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      "location": {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      "details": {
+        "columnId": 180,
+        "value": "deets"
+      },
+      "flyer": {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      "flyer_file_id": {
+        "columnId": 183,
+        "value": "7631"
+      },
+      "date": {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      "time": {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      "approved": {
+        "columnId": 178,
+        "value": "false"
+      }
+    },
+    "class": "OCA\\Tables\\Event\\RowUpdatedEvent"
+  },
+  "user": {
+    "uid": "nomis",
+    "displayName": "Simon"
+  },
+  "time": 1795550708,
+  "authentication": []
+}
+change deets
+{
+  "event": {
+    "tableId": 29,
+    "rowId": 314,
+    "previousValues": [
+      {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      {
+        "columnId": 180,
+        "value": "deets"
+      },
+      {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
+        "columnId": 178,
+        "value": "false"
+      }
+    ],
+    "values": [
+      {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      {
+        "columnId": 180,
+        "value": "change deets"
+      },
+      {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
+        "columnId": 178,
+        "value": "false"
+      }
+    ],
+    "dataByAlias": {
+      "event_name": {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      "location": {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      "details": {
+        "columnId": 180,
+        "value": "change deets"
+      },
+      "flyer": {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      "flyer_file_id": {
+        "columnId": 183,
+        "value": "7631"
+      },
+      "date": {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      "time": {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      "approved": {
+        "columnId": 178,
+        "value": "false"
+      }
+    },
+    "class": "OCA\\Tables\\Event\\RowUpdatedEvent"
+  },
+  "user": {
+    "uid": "nomis",
+    "displayName": "Simon"
+  },
+  "time": 1795550725,
+  "authentication": []
+}
+approved
+{
+  "event": {
+    "tableId": 29,
+    "rowId": 314,
+    "previousValues": [
+      {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      {
+        "columnId": 180,
+        "value": "change deets"
+      },
+      {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
+        "columnId": 178,
+        "value": "false"
+      }
+    ],
+    "values": [
+      {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      {
+        "columnId": 180,
+        "value": "change deets"
+      },
+      {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      {
+        "columnId": 183,
+        "value": "7631"
+      },
+      {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      {
+        "columnId": 178,
+        "value": "true"
+      }
+    ],
+    "dataByAlias": {
+      "event_name": {
+        "columnId": 175,
+        "value": "Test Event"
+      },
+      "location": {
+        "columnId": 179,
+        "value": "saturn"
+      },
+      "details": {
+        "columnId": 180,
+        "value": "change deets"
+      },
+      "flyer": {
+        "columnId": 181,
+        "value": "{\"title\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"value\":\"https:\\/\\/cloud.nm4p.net\\/f\\/7631\",\"providerId\":\"url\"}"
+      },
+      "flyer_file_id": {
+        "columnId": 183,
+        "value": "7631"
+      },
+      "date": {
+        "columnId": 177,
+        "value": "2026-10-31"
+      },
+      "time": {
+        "columnId": 182,
+        "value": "20:01"
+      },
+      "approved": {
+        "columnId": 178,
+        "value": "true"
+      }
+    },
+    "class": "OCA\\Tables\\Event\\RowUpdatedEvent"
+  },
+  "user": {
+    "uid": "nomis",
+    "displayName": "Simon"
+  },
+  "time": 1795550730,
+  "authentication": []
+}
+
